@@ -15,3 +15,4 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', [PostController::class, 'homepage']);
+Route::get('/home', [PostController::class, 'homepage']);

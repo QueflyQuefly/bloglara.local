@@ -9,6 +9,7 @@
 
         <title>Blog LarA</title>
         <link rel="icon" href="favicon.ico">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
@@ -25,7 +26,7 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="">Админка</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 API
                             </a>
@@ -36,7 +37,7 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item disabled" href="#">Еще что-нибудь</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link disabled">Войти</a>
                         </li>
