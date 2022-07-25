@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+    database:
+        image: mysql:8
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_USER: root
+            MYSQL_ROOT_PASSWORD: bloglara_Root_Pass
+            MYSQL_DATABASE: bloglara
+            MYSQL_USER: bloglara_user
+            MYSQL_PASSWORD: bloglara_Pass
+
+    mailer:
+        image: schickling/mailcatcher
+        ports: [1025, 1080]
+
+    redis:
+        image: redis:5-alpine
+        ports: [6379]
+
+    rabbitmq:
+        image: rabbitmq:3.7-management
+        ports: [5672, 15672]

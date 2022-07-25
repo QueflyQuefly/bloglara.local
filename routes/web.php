@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,8 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', [PostController::class, 'homepage']);
-Route::get('/home', [PostController::class, 'homepage']);
+Route::get('/', [PostController::class, 'index']);
+Route::get('/post/{id}', function ($id, PostController $postController) {
+    $post = Post::find($id);
+    $postController->show($post);
+})->whereNumber('id')->name('post_show');

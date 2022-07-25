@@ -7,16 +7,16 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 
-        <title>Blog LarA</title>
+        <title>Блог ЛарА</title>
         <link rel="icon" href="favicon.ico">
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite('resources/css/app.css')
     </head>
     <body class="antialiased">
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="">
                     <img src="favicon.ico" alt="" width="30" height="30" class="d-inline-block align-text-top">
-                    Блог о путешествиях
+                    Блог ЛарА
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -51,7 +51,7 @@
         </nav>
 
         <div class="container" style="min-height: 100vh; max-width: 900px;">
-            <h1 class='display-1'>Hello it is Base Template</h1>
+            <h1 class='display-4' style='margin: 1.5rem 0;'>Блог ЛарА</h1>
 
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -67,8 +67,25 @@
                 </div>
             @endif
 
+            @foreach ($posts as $post)
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="..." class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $post->title }}</h5>
+                                <p class="card-text">{{ $post->content }}</p>
+                                <p class="card-text"><small class="text-muted">Последнее изменение {{ $post->updated_at }}</small></p>
+                                <a href="/post/{{ $post->id }}" class="btn btn-primary">Перейти к посту</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
             <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
             </div>
         </div>
         
@@ -78,8 +95,9 @@
                     <li class="nav-item"><a href="" class="nav-link px-2 text-muted">На главную</a></li>
                     <li class="nav-item"><a href="#" class="nav-link disabled px-2 text-muted">О нас</a></li>
                 </ul>
-                <p class="text-center text-muted">&copy; 2022 Blog.spa</p>
+                <p class="text-center text-muted">&copy; 2022 Blog LarA on Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
             </footer>
         </div>
+        @vite('resources/js/app.js')
     </body>
 </html>
