@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Models\Post;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,4 +14,14 @@ use App\Models\Post;
 */
 
 Route::get('/', [PostController::class, 'index']);
-Route::get('/post/{post}', [PostController::class, 'show'])->name('post_show');
+
+Route::controller(PostController::class)->group(function () {
+    Route::prefix('post')->group(function () {
+        Route::name('post.')->group(function () {
+            Route::get('{post}', 'show')->whereNumber('post')->name('show');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            
+        });
+    });
+});

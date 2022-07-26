@@ -29,7 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -40,7 +40,14 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $validated = $request->safe();
+        $post = new Post([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+        ]);
+        $post->saveOrFail();
+
+        return redirect();
     }
 
     /**
