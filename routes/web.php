@@ -16,7 +16,4 @@ use App\Models\Post;
 */
 
 Route::get('/', [PostController::class, 'index']);
-Route::get('/post/{id}', function ($id, PostController $postController) {
-    $post = Post::find($id);
-    $postController->show($post);
-})->whereNumber('id')->name('post_show');
+Route::get('/post/{post}', [PostController::class, 'show'])->name('post_show');
