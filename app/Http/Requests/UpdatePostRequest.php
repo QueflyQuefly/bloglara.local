@@ -13,7 +13,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,27 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'postTitle'   => 'bail|required|min:1|max:120',
+            'postContent' => 'bail|required|min:1|max:30000',
+            'postCheck'   => 'required',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'postTitle.required'   => 'Введите заголовок.',
+            'postTitle.min'        => 'Количество символов заголовка ":input" должно быть больше, чем :min символов.',
+            'postTitle.max'        => 'Количество символов заголовка ":input" должно быть меньше, чем :max символов.',
+            'postContent.required' => 'Введите содержимое поста.',
+            'postContent.min'      => 'Количество символов содержимого поста ":input" должно быть больше, чем :min символов.',
+            'postContent.max'      => 'Количество символов содержимого поста ":input" должно быть меньше, чем :max символов.',
+            'postCheck.required'   => 'Необходимо согласиться с правилами сайта.',
         ];
     }
 }

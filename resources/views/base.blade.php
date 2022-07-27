@@ -16,7 +16,7 @@
     <body class="antialiased">
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="{{ route('homepage') }}">
                     <img src="/apple-touch-icon.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
                     Блог ЛарА
                 </a>
@@ -62,8 +62,8 @@
             <div class="container">
                 <footer class="py-3 my-4">
                     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                        <li class="nav-item"><a href="" class="nav-link px-2 text-muted">На главную</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link disabled px-2 text-muted">О нас</a></li>
+                        <li class="nav-item"><a href="{{ route('homepage') }}" class="nav-link px-2 text-muted">На главную</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link disabled px-2 text-muted disabled">О нас</a></li>
                     </ul>
                     <p class="text-center text-muted">&copy; 2022 Blog LarA on Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
                 </footer>

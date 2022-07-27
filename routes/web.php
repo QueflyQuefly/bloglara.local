@@ -13,7 +13,7 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', [PostController::class, 'index']);
+Route::get('/', [PostController::class, 'index'])->name('homepage');
 
 Route::controller(PostController::class)->group(function () {
     Route::prefix('post')->group(function () {
@@ -21,7 +21,9 @@ Route::controller(PostController::class)->group(function () {
             Route::get('{post}', 'show')->whereNumber('post')->name('show');
             Route::get('create', 'create')->name('create');
             Route::post('store', 'store')->name('store');
-            
+            Route::get('edit/{post}', 'edit')->whereNumber('post')->name('edit');
+            Route::put('update/{post}', 'update')->whereNumber('post')->name('update');
+            Route::delete('delete/{post}', 'destroy')->whereNumber('post')->name('delete');
         });
     });
 });

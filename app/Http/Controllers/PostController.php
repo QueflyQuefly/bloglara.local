@@ -42,12 +42,12 @@ class PostController extends Controller
     {
         $validated = $request->safe();
         $post = new Post([
-            'title' => $validated['title'],
-            'content' => $validated['content'],
+            'title'   => $validated['postTitle'],
+            'content' => $validated['postContent'],
         ]);
         $post->saveOrFail();
 
-        return redirect();
+        return redirect(route('homepage'));
     }
 
     /**
@@ -69,7 +69,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.edit', ['post' => $post]);
     }
 
     /**
@@ -81,7 +81,12 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $validated = $request->safe();
+        $post->title = $validated['postTitle'];
+        $post->content = $validated['postContent'];
+        $post->update();
+        
+        return redirect(route('post.show', ['post' => $post]));
     }
 
     /**
@@ -92,6 +97,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect(route('homepage'));
     }
 }
