@@ -26,7 +26,19 @@
             </label>
         </div>
 
-        @include('_errors')
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        @if ($error = 'These credentials do not match our records.')
+                            <li>Неверная почта или пароль</li>
+                        @else
+                            <li>{{ $error }}</li>
+                        @endif
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <div class='mb-3'>
             <a class="btn border" href="{{ route('register') }}">
