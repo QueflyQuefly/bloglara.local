@@ -5,44 +5,36 @@
 @section('h1', 'Форма входа')
 
 @section('content')
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+        <div class="mb-3">
+            <label for="email" class='form-label'>Email</label>
+            <input id="email" class="form-control" type="email" name="email" value="{{ old('email') }}" aria-describedby="emailHelp" required />
+            <div id="emailHelp" class="form-text">Количество символов: от 1 до 50</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class='form-label'>
+                {{ __('Введите пароль. ') }} <a href="{{ route('password.request') }}">{{ __(' Нажмите здесь, если забыли') }}</a>
+            </label>
+            <input id="password" class="form-control" type="password" name="password" aria-describedby="passHelp" required autocomplete="current-password" />
+            <div id="passHelp" class="form-text">Количество символов: от 8 до 20</div>
+        </div>
+        <div class="mb-3">
+            <label for="remember_me" class="form-label">
+                <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
+                {{ __('Запомнить меня') }}
+            </label>
+        </div>
 
-            <!-- Email Address -->
-            <div>
-                <label for="email" :value="__('Email')" />
+        @include('_errors')
 
-                <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <label for="password" :value="__('Password')" />
-
-                <input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <button class="ml-3">
-                    {{ __('Log in') }}
-                </button>
-            </div>
-        </form>
+        <div class='mb-3'>
+            <a class="btn border" href="{{ route('register') }}">
+                {{ __('Зарегистрироваться') }}
+            </a>
+            <button class="btn btn-primary" style='float: right;'>
+                {{ __('Войти') }}
+            </button>
+        </div>
+    </form>
 @endsection

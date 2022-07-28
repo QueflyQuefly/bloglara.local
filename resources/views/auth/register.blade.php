@@ -13,7 +13,7 @@
             <div id="nameHelp" class="form-text">Количество символов: от 1 до 50</div>
         </div>
         <div class="mb-3">
-            <label for="email" class='form-label'>{{ __('Email') }}</label>
+            <label for="email" class='form-label'>Email</label>
             <input id="email" class="form-control" type="email" name="email" value="{{ old('email') }}" aria-describedby="emailHelp" required />
             <div id="emailHelp" class="form-text">Количество символов: от 1 до 50</div>
         </div>
@@ -27,21 +27,9 @@
             <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required />
         </div>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        
-        <div class="mb-3">
-            <a class="btn border" href="{{ route('login') }}">
-                {{ __('Войти') }}
-            </a>
+        @include('_errors')
 
+        <div class="mb-3">
             <button class="btn btn-primary" style='float: right;'>
                 {{ __('Зарегистрироваться') }}
             </button>

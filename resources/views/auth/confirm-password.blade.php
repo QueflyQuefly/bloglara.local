@@ -1,31 +1,27 @@
 @extends('base')
 
-@section('title', 'Блог ЛарА - Вход')
+@section('title', 'Блог ЛарА - Подтверждение пароля')
 
-@section('h1', 'Форма входа')
+@section('h1', 'Подтверждение пароля')
 
 @section('content')
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+    <div class="mb-4 text-sm text-gray-600">
+        {{ __('Пожалуйста, подтвердите свой пароль прежде, чем продолжить') }}
+    </div>
+
+    <form method="POST" action="{{ route('password.confirm') }}">
+        @csrf
+        <div class="mb-3">
+            <label for="password" class="form-label">{{ __('Введите пароль') }}</label>
+            <input id="password" class="form-control" type="password" name="password" required autocomplete="current-password" />
         </div>
 
-        <form method="POST" action="{{ route('password.confirm') }}">
-            @csrf
+        @include('_errors')
 
-            <!-- Password -->
-            <div>
-                <label for="password" :value="__('Password')" />
-
-                <input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <div class="flex justify-end mt-4">
-                <button>
-                    {{ __('Confirm') }}
-                </button>
-            </div>
-        </form>
+        <div class="mb-3">
+            <button class="btn btn-primary" style='float: right;'>
+                {{ __('Подтвердить') }}
+            </button>
+        </div>
+    </form>
 @endsection

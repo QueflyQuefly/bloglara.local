@@ -1,38 +1,35 @@
 @extends('base')
 
-@section('title', 'Блог ЛарА - Вход')
+@section('title', 'Блог ЛарА - Верификация email')
 
-@section('h1', 'Форма входа')
+@section('h1', 'Верификация email')
 
 @section('content')
+    <div class="mb-3">
+        <p class="tex-center">{{ __('Проверьте свою почту. Если нет письма от нас, то проверьте папку Спам, а также попробуйте отправить письмо еще раз.') }}</p>
+    </div>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Could you verify your email address? If you didn\'t receive the email, we will send you another.') }}
+    @if (session('status') == 'verification-link-sent')
+        <div class="mb-3 color-green">
+            {{ __('Письмо со специальной ссылкой для восстановления доступа к аккаунту успешно отправлено') }}
         </div>
+    @endif
 
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-            </div>
-        @endif
-
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
-
-                <div>
-                    <button>
-                        {{ __('Resend Verification Email') }}
-                    </button>
-                </div>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
+    <div>
+        <form method="POST" action="{{ route('verification.send') }}">
+            @csrf
+            <div class="mb-3">
+                <button class="btn btn-primary">
+                    {{ __('Отправить письмо еще раз') }}
                 </button>
-            </form>
-        </div>
+            </div>
+        </form>
+
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn border">
+                {{ __('Выйти из аккаунта') }}
+            </button>
+        </form>
+    </div>
 @endsection

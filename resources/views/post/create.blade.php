@@ -22,15 +22,7 @@
             <label class="form-check-label" for="postCheck">Согласен с правилами сайта</label>
         </div>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('_errors')
 
         <button type="submit" class="btn btn-primary">Отправить</button>
     </form>

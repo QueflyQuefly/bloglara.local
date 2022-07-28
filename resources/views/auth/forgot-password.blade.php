@@ -1,29 +1,33 @@
 @extends('base')
 
-@section('title', 'Блог ЛарА - Вход')
+@section('title', 'Блог ЛарА - Восстановление аккаунта')
 
-@section('h1', 'Форма входа')
+@section('h1', 'Восстановление аккаунта')
 
 @section('content')
+    <div class="mb-3">
+        <p class="text-center">{{ __('Забыли пароль? Нет проблем. Введите свой email, на который мы отправим ссылку для восстановления вашего аккаунта. Если у вас еще нет аккаунта - зарегистрируйтесь') }}</p>
+    </div>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    <form method="POST" action="{{ route('password.email') }}">
+        @csrf
+
+        <!-- Email Address -->
+        <div class='mb-3'>
+            <label for="email" class="form-label">{{ __('Email') }}</label>
+            <input id="email" class="form-control" type="email" name="email" value="{{ old('email') }}" aria-describedby="emailHelp" required autofocus />
+            <div id="emailHelp" class="form-text">Введите почту, которую вы указали при регистрации</div>
         </div>
 
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
+        @include('_errors')
 
-            <!-- Email Address -->
-            <div>
-                <label for="email" :value="__('Email')" />
-
-                <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <button>
-                    {{ __('Email Password Reset Link') }}
-                </button>
-            </div>
-        </form>
+        <div class="mb-3">
+            <a class="btn border" href="{{ route('register') }}">
+                {{ __('Зарегистрироваться') }}
+            </a>
+            <button class="btn btn-primary" style="float: right;">
+                {{ __('Подтвердить') }}
+            </button>
+        </div>
+    </form>
 @endsection
