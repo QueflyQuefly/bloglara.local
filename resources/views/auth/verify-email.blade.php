@@ -1,7 +1,13 @@
+@extends('base')
 
+@section('title', 'Блог ЛарА - Вход')
+
+@section('h1', 'Форма входа')
+
+@section('content')
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+            {{ __('Could you verify your email address? If you didn\'t receive the email, we will send you another.') }}
         </div>
 
         @if (session('status') == 'verification-link-sent')
@@ -29,3 +35,4 @@
                 </button>
             </form>
         </div>
+@endsection

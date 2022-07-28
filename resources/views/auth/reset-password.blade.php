@@ -1,4 +1,10 @@
+@extends('base')
 
+@section('title', 'Блог ЛарА - Вход')
+
+@section('h1', 'Форма входа')
+
+@section('content')
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
 
@@ -34,3 +40,4 @@
                 </button>
             </div>
         </form>
+@endsection

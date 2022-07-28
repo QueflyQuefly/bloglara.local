@@ -1,4 +1,10 @@
+@extends('base')
 
+@section('title', 'Блог ЛарА - Вход')
+
+@section('h1', 'Форма входа')
+
+@section('content')
 
         <div class="mb-4 text-sm text-gray-600">
             {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
@@ -20,3 +26,4 @@
                 </button>
             </div>
         </form>
+@endsection

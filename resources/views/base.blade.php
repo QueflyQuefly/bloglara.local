@@ -26,8 +26,26 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/post/create">Создать пост</a>
+                            @auth
+                                <a class="nav-link" href="/post/create">Создать пост</a>
+                            @else
+                                <a class="nav-link disabled">Создать пост</a>
+                            @endauth
                         </li>
+
+                        @auth
+                            <li class="nav-item">
+                                <form action='{{ route('logout') }}' method='POST'>
+                                    @csrf
+                                    <button type='submit' class="nav-link" style='border: none; background-color: inherit;'>Выйти</button>
+                                </form>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Войти</a>
+                            </li>
+                        @endauth
+
                         {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 API
@@ -40,9 +58,6 @@
                                 <li><a class="dropdown-item disabled" href="#">Еще что-нибудь</a></li>
                             </ul>
                         </li> --}}
-                        <li class="nav-item">
-                            <a class="nav-link disabled">Войти</a>
-                        </li>
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Поисковый запрос" aria-label="Search">
