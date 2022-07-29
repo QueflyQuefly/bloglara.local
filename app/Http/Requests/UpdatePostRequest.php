@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -39,11 +40,11 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'postTitle.required'   => 'Введите заголовок.',
-            'postTitle.min'        => 'Количество символов заголовка ":input" должно быть больше, чем :min символов.',
-            'postTitle.max'        => 'Количество символов заголовка ":input" должно быть меньше, чем :max символов.',
+            'postTitle.min'        => 'Количество символов заголовка ":input" должно быть больше, чем :min.',
+            'postTitle.max'        => 'Количество символов заголовка ":input" должно быть меньше, чем :max.',
             'postContent.required' => 'Введите содержимое поста.',
-            'postContent.min'      => 'Количество символов содержимого поста ":input" должно быть больше, чем :min символов.',
-            'postContent.max'      => 'Количество символов содержимого поста ":input" должно быть меньше, чем :max символов.',
+            'postContent.min'      => 'Количество символов содержимого поста ":input" должно быть больше, чем :min.',
+            'postContent.max'      => 'Количество символов содержимого поста ":input" должно быть меньше, чем :max.',
             'postCheck.required'   => 'Необходимо согласиться с правилами сайта.',
         ];
     }

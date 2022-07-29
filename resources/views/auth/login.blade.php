@@ -41,10 +41,10 @@
         @endif
 
         <div class='mb-3'>
-            <a class="btn border" href="{{ route('register') }}">
+            <a class="btn btn-secondary" href="{{ route('register') }}">
                 {{ __('Зарегистрироваться') }}
             </a>
-            <button class="btn btn-primary" style='float: right;'>
+            <button class="btn btn-primary float-end">
                 {{ __('Войти') }}
             </button>
         </div>

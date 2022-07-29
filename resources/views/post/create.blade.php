@@ -24,6 +24,6 @@
 
         @include('_errors')
 
-        <button type="submit" class="btn btn-primary">Отправить</button>
+        <button type="submit" class="btn btn-primary float-end">Отправить</button>
     </form>
 @endsection

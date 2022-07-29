@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,24 @@ Route::controller(PostController::class)->group(function () {
     Route::prefix('post')->group(function () {
         Route::name('post.')->group(function () {
             Route::get('{post}', 'show')->whereNumber('post')->name('show');
-            Route::get('create', 'create')->name('create');
-            Route::post('store', 'store')->name('store');
-            Route::get('edit/{post}', 'edit')->whereNumber('post')->name('edit');
-            Route::put('update/{post}', 'update')->whereNumber('post')->name('update');
-            Route::delete('delete/{post}', 'destroy')->whereNumber('post')->name('delete');
+            Route::get('create', 'create')->middleware('auth')->name('create');
+            Route::post('store', 'store')->middleware('auth')->name('store');
+            Route::get('edit/{post}', 'edit')->whereNumber('post')->middleware('auth')->name('edit');
+            Route::put('update/{post}', 'update')->whereNumber('post')->middleware('auth')->name('update');
+            Route::delete('delete/{post}', 'destroy')->whereNumber('post')->middleware('auth')->name('delete');
+        });
+    });
+});
+
+Route::controller(CommentController::class)->group(function () {
+    Route::prefix('comment')->group(function () {
+        Route::name('comment.')->group(function () {
+            Route::get('{comment}', 'show')->whereNumber('comment')->name('show');
+            Route::get('create/{postId}', 'create')->whereNumber('postId')->middleware('auth')->name('create');
+            Route::post('store/{postId}', 'store')->whereNumber('postId')->middleware('auth')->name('store');
+            Route::get('edit/{comment}', 'edit')->whereNumber('comment')->middleware('auth')->name('edit');
+            Route::put('update/{comment}', 'update')->whereNumber('comment')->middleware('auth')->name('update');
+            Route::delete('delete/{comment}', 'destroy')->whereNumber('comment')->middleware('auth')->name('delete');
         });
     });
 });

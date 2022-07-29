@@ -30,7 +30,7 @@
         @include('_errors')
 
         <div class="mb-3">
-            <button class="btn btn-primary" style='float: right;'>
+            <button class="btn btn-primary float-end">
                 {{ __('Зарегистрироваться') }}
             </button>
         </div>

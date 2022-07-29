@@ -26,11 +26,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            @auth
-                                <a class="nav-link" href="/post/create">Создать пост</a>
-                            @else
-                                <a class="nav-link disabled">Создать пост</a>
-                            @endauth
+                            <a class="nav-link" href="/post/create">Создать пост</a>
                         </li>
 
                         @auth
@@ -68,7 +64,7 @@
         </nav>
 
         <div class="container" style="min-height: 100vh; max-width: 900px;">
-            <h1 class='display-4' style='margin: 1.5rem 0;'>@yield('h1', 'Base Template')</h1>
+            <h1 class='display-4 py-4'>@yield('h1', 'Base Template')</h1>
             @yield('content')
         </div>
 

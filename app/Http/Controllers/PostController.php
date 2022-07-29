@@ -42,6 +42,7 @@ class PostController extends Controller
     {
         $validated = $request->safe();
         $post = new Post([
+            'user_id' => $request->user()->id,
             'title'   => $validated['postTitle'],
             'content' => $validated['postContent'],
         ]);
