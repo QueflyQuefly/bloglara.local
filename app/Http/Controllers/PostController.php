@@ -16,9 +16,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')
-            ->take(10)
-            ->get();
+        //$posts = json_decode(Redis::get('last_posts'), true);
+
+        if (empty($posts)) {
+            $posts = Post::orderBy('id', 'desc')
+                ->take(10)
+                ->get();
+            Redis::set('last_posts', $posts->toJson());
+        }
 
         return view('homepage', ['posts' => $posts]);
     }
@@ -42,7 +47,7 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $validated = $request->safe();
-        $post = new Post([
+        $post      = new Post([
             'user_id' => $request->user()->id,
             'title'   => $validated['postTitle'],
             'content' => $validated['postContent'],
@@ -60,7 +65,17 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('post.show', ['post' => $post]);
+        $comments = json_decode(Redis::get(sprintf('post_%s_comments', $post->id)), true);
+
+        if (empty($comments)) {
+            $comments = $post->comments;
+            Redis::set(
+                sprintf('post_%s_comments', $post->id),
+                $comments->toJson()
+            );
+        }
+
+        return view('post.show', ['post' => $post, 'comments' => $comments]);
     }
 
     /**
@@ -87,8 +102,8 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $validated = $request->safe();
-        $post->title = $validated['postTitle'];
+        $validated     = $request->safe();
+        $post->title   = $validated['postTitle'];
         $post->content = $validated['postContent'];
         $post->update();
         

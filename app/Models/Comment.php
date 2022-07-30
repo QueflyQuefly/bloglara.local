@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +19,23 @@ class Comment extends Model
     protected $fillable = ['user_id', 'post_id', 'content'];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['author'];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime:d.m.Y в H:i:s',
+        'updated_at' => 'datetime:d.m.Y в H:i:s',
+    ];
+
+    /**
      * Get the user that owns the comment.
      */
     public function user()
@@ -30,5 +49,41 @@ class Comment extends Model
     public function post()
     {
         return $this->belongsTo(Post::class);
+    }
+
+    /**
+     * Get the comment's author.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function author(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->user->name,
+        );
+    }
+
+    /**
+     * Get the comment's created time.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => date('d.m.Y в H:i:s', strtotime($value)),
+        );
+    }
+
+    /**
+     * Get the comment's updated time.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function updatedAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => date('d.m.Y в H:i:s', strtotime($value)),
+        );
     }
 }

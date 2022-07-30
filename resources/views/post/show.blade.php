@@ -10,11 +10,11 @@
     <div class='mx-5 py-1'>
         <p><small>Автор: {{ $post->user->name }}</small> <br />
 
-        @if ($post->updated_at->format('d.m.Y в H:i:s') === $post->created_at->format('d.m.Y в H:i:s'))
-            <small class="text-muted">Дата создания {{ $post->created_at->format('d.m.Y в H:i:s') }}</small>
+        @if ($post->updated_at === $post->created_at)
+            <small class="text-muted">Дата создания {{ $post->created_at }}</small>
         @else
-            <small class="text-muted">Последнее изменение {{ $post->updated_at->format('d.m.Y в H:i:s') }}</small> <br />
-            <small class="text-muted">Дата создания {{ $post->created_at->format('d.m.Y в H:i:s') }}</small>
+            <small class="text-muted">Последнее изменение {{ $post->updated_at }}</small> <br />
+            <small class="text-muted">Дата создания {{ $post->created_at }}</small>
         @endif
         </p>
     </div>
@@ -37,8 +37,8 @@
     </div>
     <div class="py-3">
         <p class="lead">Комментарии:</p>
-        @if (!empty($post->comments[0]))
-            @foreach ($post->comments as $comment)
+        @if (!empty($comments[0]))
+            @foreach ($comments as $comment)
                 @include('comment._comment')
             @endforeach
         @else
