@@ -1,4 +1,4 @@
-<form action='{{ route('comment.store', ['postId' => $post]) }}' method="POST">
+<form action='{{ route('comment.store', ['post' => $post]) }}' method="POST">
     @csrf
 
     <div class="mb-3">

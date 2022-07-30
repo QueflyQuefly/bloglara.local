@@ -36,8 +36,8 @@ Route::controller(CommentController::class)->group(function () {
     Route::prefix('comment')->group(function () {
         Route::name('comment.')->group(function () {
             Route::get('{comment}', 'show')->whereNumber('comment')->name('show');
-            Route::get('create/{postId}', 'create')->whereNumber('postId')->middleware('auth')->name('create');
-            Route::post('store/{postId}', 'store')->whereNumber('postId')->middleware('auth')->name('store');
+            Route::get('create/{post}', 'create')->whereNumber('post')->middleware('auth')->name('create');
+            Route::post('store/{post}', 'store')->whereNumber('post')->middleware('auth')->name('store');
             Route::get('edit/{comment}', 'edit')->whereNumber('comment')->middleware('auth')->name('edit');
             Route::put('update/{comment}', 'update')->whereNumber('comment')->middleware('auth')->name('update');
             Route::delete('delete/{comment}', 'destroy')->whereNumber('comment')->middleware('auth')->name('delete');

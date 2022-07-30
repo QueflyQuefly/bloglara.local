@@ -15,15 +15,17 @@
 
     <p class="mb-3" style="font-family: 'Tahoma';">{{ $post->content }}</p>
 
-    <div class="mb-5">
-        <form action='{{ route('post.delete', ['post' => $post->id]) }}'  method="POST">
-            @method('DELETE')
-            @csrf
-            <a href='{{ route('post.edit', ['post' => $post->id]) }}' class="btn btn-primary float-start">Изменить пост</a>
-            <button type="submit" class="btn btn-secondary float-end">Удалить пост</button>
-        </form>
-    </div>
-
+    @auth
+        <div class="mb-5">
+            <form action='{{ route('post.delete', ['post' => $post->id]) }}'  method="POST">
+                @method('DELETE')
+                @csrf
+                <a href='{{ route('post.edit', ['post' => $post->id]) }}' class="btn btn-primary float-start">Изменить пост</a>
+                <button type="submit" class="btn btn-secondary float-end">Удалить пост</button>
+            </form>
+        </div>
+    @endauth
+    
     <div class="py-5">
         @include('comment._create')
     </div>

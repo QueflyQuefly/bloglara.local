@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
+use App\Models\Post;
 
 class CommentController extends Controller
 {
@@ -21,11 +22,12 @@ class CommentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function create(int $postId)
+    public function create(Post $post)
     {
-        return view('comment.create', ['postId' => $postId]);
+        return view('comment.create', ['post' => $post]);
     }
 
     /**
@@ -34,17 +36,17 @@ class CommentController extends Controller
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request, int $postId)
+    public function store(StoreCommentRequest $request, Post $post)
     {
         $validated = $request->safe();
         $comment = new Comment([
             'user_id' => $request->user()->id,
-            'post_id' => $postId,
+            'post_id' => $post->id,
             'content' => $validated['commentContent'],
         ]);
         $comment->saveOrFail();
 
-        return redirect(route('post.show', ['post' => $postId]));
+        return redirect(route('post.show', ['post' => $post]));
     }
 
     /**
@@ -55,7 +57,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        return view('comment.show', ['comment' => $comment]);
     }
 
     /**
@@ -66,7 +68,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('comment.edit', ['comment' => $comment]);
     }
 
     /**
@@ -78,7 +80,11 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        //
+        $validated = $request->safe();
+        $comment->content = $validated['commentContent'];
+        $comment->update();
+        
+        return redirect(route('post.show', ['post' => $comment->post]));
     }
 
     /**
@@ -89,6 +95,9 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $post = $comment->post;
+        $comment->delete();
+
+        return redirect(route('post.show', ['post' => $post]));
     }
 }

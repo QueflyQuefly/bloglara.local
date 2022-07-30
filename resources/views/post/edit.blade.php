@@ -10,7 +10,7 @@
         @csrf
         <div class="mb-3">
             <label for="postTitle" class="form-label">Заголовок</label>
-            <input type="text" name='postTitle' class="form-control" id="postTitle" aria-describedby="textHelp"  value="{{ $post->title }}" placeholder="Введите заголовок поста" required>
+            <input type="text" name='postTitle' class="form-control" id="postTitle" aria-describedby="textHelp"  value="{{ $post->title }}" placeholder="Введите заголовок поста" required autofocus>
             <div id="textHelp" class="form-text">Количество символов: от 1 до 120</div>
         </div>
         <div class="mb-3">
