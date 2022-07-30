@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
 
 class CommentController extends Controller
 {
@@ -68,6 +68,8 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
+        $this->authorize('update', $comment);
+
         return view('comment.edit', ['comment' => $comment]);
     }
 
@@ -80,6 +82,8 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
+        $this->authorize('update', $comment);
+
         $validated = $request->safe();
         $comment->content = $validated['commentContent'];
         $comment->update();
@@ -95,6 +99,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        $this->authorize('delete', $comment);
+
         $post = $comment->post;
         $comment->delete();
 

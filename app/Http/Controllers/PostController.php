@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Redis;
 
 class PostController extends Controller
 {
@@ -70,6 +71,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         return view('post.edit', ['post' => $post]);
     }
 
@@ -82,6 +85,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $validated = $request->safe();
         $post->title = $validated['postTitle'];
         $post->content = $validated['postContent'];
@@ -98,6 +103,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         return redirect(route('homepage'));
