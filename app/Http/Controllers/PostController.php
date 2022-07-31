@@ -19,13 +19,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = json_decode(Cache::remember('last_posts', now()->addMinutes(1), function () {
+        $jsonString = Cache::remember('last_posts', now()->addSeconds(15), function () {
             $posts = Post::orderBy('id', 'desc')
                 ->take(10)
                 ->get();
 
             return $posts->toJson();
-        }), true);
+        });
+
+        $posts = json_decode($jsonString, true);
 
         return view('homepage', ['posts' => $posts]);
     }
@@ -67,16 +69,19 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $comments = json_decode(Cache::remember(
+        $jsonString = Cache::remember(
             sprintf('post_%s_comments', $post->id),
-            now()->addMinutes(1),
+            now()->addSeconds(15),
             function () use ($post) {
                 $comments = Comment::where('post_id', $post->id)
                     ->orderBy('id', 'DESC')
                     ->get();
 
                 return $comments->toJson();
-            }), true);
+            }
+        );
+
+        $comments = json_decode($jsonString, true);
 
         return view('post.show', ['post' => $post, 'comments' => $comments]);
     }
