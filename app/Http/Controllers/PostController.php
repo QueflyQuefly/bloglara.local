@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
+
 // use Illuminate\Support\Facades\Redis;
 
 class PostController extends Controller
@@ -22,7 +23,7 @@ class PostController extends Controller
             $posts = Post::orderBy('id', 'desc')
                 ->take(10)
                 ->get();
-            
+
             return $posts->toJson();
         }), true);
 
@@ -48,9 +49,9 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $validated = $request->safe();
-        $post      = new Post([
+        $post = new Post([
             'user_id' => $request->user()->id,
-            'title'   => $validated['postTitle'],
+            'title' => $validated['postTitle'],
             'content' => $validated['postContent'],
         ]);
         $post->saveOrFail();
@@ -67,15 +68,15 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $comments = json_decode(Cache::remember(
-            sprintf('post_%s_comments', $post->id), 
-            now()->addMinutes(1), 
+            sprintf('post_%s_comments', $post->id),
+            now()->addMinutes(1),
             function () use ($post) {
                 $comments = Comment::where('post_id', $post->id)
                     ->orderBy('id', 'DESC')
                     ->get();
-                
+
                 return $comments->toJson();
-        }), true);
+            }), true);
 
         return view('post.show', ['post' => $post, 'comments' => $comments]);
     }
@@ -104,11 +105,11 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $validated     = $request->safe();
-        $post->title   = $validated['postTitle'];
+        $validated = $request->safe();
+        $post->title = $validated['postTitle'];
         $post->content = $validated['postContent'];
         $post->update();
-        
+
         return redirect(route('post.show', ['post' => $post]));
     }
 

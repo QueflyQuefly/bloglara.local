@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use App\Models\Post;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
+use App\Models\Post;
 
 class CommentController extends Controller
 {
@@ -40,7 +39,7 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request, Post $post)
     {
         $validated = $request->safe();
-        $comment   = new Comment([
+        $comment = new Comment([
             'user_id' => $request->user()->id,
             'post_id' => $post->id,
             'content' => $validated['commentContent'],
@@ -85,10 +84,10 @@ class CommentController extends Controller
     {
         $this->authorize('update', $comment);
 
-        $validated        = $request->safe();
+        $validated = $request->safe();
         $comment->content = $validated['commentContent'];
         $comment->update();
-        
+
         return redirect(route('post.show', ['post' => $comment->post]));
     }
 

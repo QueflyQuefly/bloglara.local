@@ -25,7 +25,7 @@ class UpdateCommentRequest extends FormRequest
     {
         return [
             'commentContent' => 'bail|required|min:1|max:30000',
-            'commentCheck'   => 'required',
+            'commentCheck' => 'required',
         ];
     }
 
@@ -38,9 +38,9 @@ class UpdateCommentRequest extends FormRequest
     {
         return [
             'commentContent.required' => 'Введите содержимое комментария.',
-            'commentContent.min'      => 'Количество символов содержимого комментария ":input" должно быть больше, чем :min.',
-            'commentContent.max'      => 'Количество символов содержимого комментария ":input" должно быть меньше, чем :max.',
-            'commentCheck.required'   => 'Необходимо согласиться с правилами сайта.',
+            'commentContent.min' => 'Количество символов содержимого комментария ":input" должно быть больше, чем :min.',
+            'commentContent.max' => 'Количество символов содержимого комментария ":input" должно быть меньше, чем :max.',
+            'commentCheck.required' => 'Необходимо согласиться с правилами сайта.',
         ];
     }
 }

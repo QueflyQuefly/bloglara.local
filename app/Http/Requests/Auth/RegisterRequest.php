@@ -39,17 +39,17 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'      => 'Введите имя и фамилию.',
-            'name.string'        => 'Имя и фамилия должны быть строкой.',
-            'name.max'           => 'Количество символов ":input" должно быть меньше, чем :max.',
-            'email.required'     => 'Введите email.',
-            'email.string'       => 'Email должна быть строкой.',
-            'email.email'        => 'Введенная вами почта не соответсвует действительному адресу email.',
-            'email.unique'       => 'Пользователь с таким email уже зарегистрирован.',
-            'email.max'          => 'Количество символов email ":input" должно быть меньше, чем :max символов.',
-            'password.required'  => 'Введите пароль.',
+            'name.required' => 'Введите имя и фамилию.',
+            'name.string' => 'Имя и фамилия должны быть строкой.',
+            'name.max' => 'Количество символов ":input" должно быть меньше, чем :max.',
+            'email.required' => 'Введите email.',
+            'email.string' => 'Email должна быть строкой.',
+            'email.email' => 'Введенная вами почта не соответсвует действительному адресу email.',
+            'email.unique' => 'Пользователь с таким email уже зарегистрирован.',
+            'email.max' => 'Количество символов email ":input" должно быть меньше, чем :max символов.',
+            'password.required' => 'Введите пароль.',
             'password.confirmed' => 'Пароли не совпадают.',
-            'password.min'       => 'Количество символов пароля должно быть больше, чем :min символов.',
+            'password.min' => 'Количество символов пароля должно быть больше, чем :min символов.',
         ];
     }
 }

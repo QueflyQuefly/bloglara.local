@@ -24,9 +24,9 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'postTitle'   => 'bail|required|min:1|max:120',
+            'postTitle' => 'bail|required|min:1|max:120',
             'postContent' => 'bail|required|min:1|max:30000',
-            'postCheck'   => 'required',
+            'postCheck' => 'required',
         ];
     }
 
@@ -38,13 +38,13 @@ class UpdatePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'postTitle.required'   => 'Введите заголовок.',
-            'postTitle.min'        => 'Количество символов заголовка ":input" должно быть больше, чем :min.',
-            'postTitle.max'        => 'Количество символов заголовка ":input" должно быть меньше, чем :max.',
+            'postTitle.required' => 'Введите заголовок.',
+            'postTitle.min' => 'Количество символов заголовка ":input" должно быть больше, чем :min.',
+            'postTitle.max' => 'Количество символов заголовка ":input" должно быть меньше, чем :max.',
             'postContent.required' => 'Введите содержимое поста.',
-            'postContent.min'      => 'Количество символов содержимого поста ":input" должно быть больше, чем :min.',
-            'postContent.max'      => 'Количество символов содержимого поста ":input" должно быть меньше, чем :max.',
-            'postCheck.required'   => 'Необходимо согласиться с правилами сайта.',
+            'postContent.min' => 'Количество символов содержимого поста ":input" должно быть больше, чем :min.',
+            'postContent.max' => 'Количество символов содержимого поста ":input" должно быть меньше, чем :max.',
+            'postCheck.required' => 'Необходимо согласиться с правилами сайта.',
         ];
     }
 }
