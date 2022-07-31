@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Comment;
 use App\Models\Post;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
+// use Illuminate\Support\Facades\Redis;
 
 class PostController extends Controller
 {
@@ -16,14 +18,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        //$posts = json_decode(Redis::get('last_posts'), true);
-
-        if (empty($posts)) {
+        $posts = json_decode(Cache::remember('last_posts', now()->addMinutes(1), function () {
             $posts = Post::orderBy('id', 'desc')
                 ->take(10)
                 ->get();
-            Redis::set('last_posts', $posts->toJson());
-        }
+            
+            return $posts->toJson();
+        }), true);
 
         return view('homepage', ['posts' => $posts]);
     }
@@ -65,15 +66,16 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $comments = json_decode(Redis::get(sprintf('post_%s_comments', $post->id)), true);
-
-        if (empty($comments)) {
-            $comments = $post->comments;
-            Redis::set(
-                sprintf('post_%s_comments', $post->id),
-                $comments->toJson()
-            );
-        }
+        $comments = json_decode(Cache::remember(
+            sprintf('post_%s_comments', $post->id), 
+            now()->addMinutes(1), 
+            function () use ($post) {
+                $comments = Comment::where('post_id', $post->id)
+                    ->orderBy('id', 'DESC')
+                    ->get();
+                
+                return $comments->toJson();
+        }), true);
 
         return view('post.show', ['post' => $post, 'comments' => $comments]);
     }

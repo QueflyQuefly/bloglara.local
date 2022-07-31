@@ -36,13 +36,13 @@
         @include('comment._create')
     </div>
     <div class="py-3">
-        <p class="lead">Комментарии:</p>
         @if (!empty($comments[0]))
+            <p class="lead">Комментарии ({{ count($comments) }}):</p>
             @foreach ($comments as $comment)
                 @include('comment._comment')
             @endforeach
         @else
-            <p>Пока никто не оставил комментарий. Будьте первым!</p>
+            <p class="lead">Пока никто не оставил комментарий. Будьте первым!</p>
         @endif
     </div>
 @endsection

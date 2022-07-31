@@ -63,15 +63,14 @@
             </div>
         </nav>
 
-        <div class="container" style="min-height: 100vh; max-width: 900px;">
+        <div class="container" style="min-height: 70vh; max-width: 900px;">
             <h1 class='display-4 py-4'>@yield('h1', 'Base Template')</h1>
             @yield('content')
         </div>
 
-        
         @section('footer')
             <div class="container">
-                <footer class="py-3 my-4">
+                <footer class="py-3 mt-5">
                     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                         <li class="nav-item"><a href="{{ route('homepage') }}" class="nav-link px-2 text-muted">На главную</a></li>
                         <li class="nav-item"><a href="#" class="nav-link disabled px-2 text-muted disabled">О нас</a></li>
