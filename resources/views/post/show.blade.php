@@ -20,7 +20,7 @@
     </div>
 
     <div class='py-4'>
-        <img src="{{ $post['image'] }}" class="img-fluid" alt="Картинка к посту">
+        <img src="/storage/{{ $post['image'] }}" class="img-fluid" alt="Картинка к посту">
     </div>
 
     <p class="mb-3" style="font-family: 'Tahoma';">{{ $post->content }}</p>
