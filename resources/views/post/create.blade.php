@@ -17,6 +17,10 @@
             <textarea name='postContent' class="form-control" id="postContent" aria-describedby="textareaHelp" style='height: 10rem' placeholder="Введите содержимое поста" required>{{ old('postContent') }}</textarea>
             <div id="textareaHelp" class="form-text">Количество символов: от 1 до 30000</div>
         </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="postImage" name="postImage">
+            <label class="input-group-text" for="postImage">Загрузите картинку для поста</label>
+        </div>
         <div class="mb-3 form-check">
             <input type="checkbox" name='postCheck' class="form-check-input" id="postCheck" required>
             <label class="form-check-label" for="postCheck">Согласен с правилами сайта</label>

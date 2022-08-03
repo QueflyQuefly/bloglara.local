@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id', false, true);
             $table->string('title', 255);
             $table->text('content');
+            $table->string('image', 255);
             $table->timestamps();
         });
     }

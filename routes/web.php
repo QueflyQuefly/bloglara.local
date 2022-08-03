@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminController;
+use App\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +43,14 @@ Route::controller(CommentController::class)->group(function () {
             Route::get('edit/{comment}', 'edit')->whereNumber('comment')->middleware('auth')->name('edit');
             Route::put('update/{comment}', 'update')->whereNumber('comment')->middleware('auth')->name('update');
             Route::delete('delete/{comment}', 'destroy')->whereNumber('comment')->middleware('auth')->name('delete');
+        });
+    });
+});
+
+Route::controller(AdminController::class)->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::name('admin.')->group(function () {
+            Route::get('/', 'index')->middleware(sprintf('role:ROLE_ADMIN', EnsureUserHasRole::ADMIN))->name('index');
         });
     });
 });

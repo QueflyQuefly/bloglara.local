@@ -25,10 +25,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/post/create">Создать пост</a>
-                        </li>
-
                         @auth
                             <li class="nav-item">
                                 <form action='{{ route('logout') }}' method='POST'>
@@ -42,6 +38,12 @@
                             </li>
                         @endauth
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('post.create') }}">Создать пост</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.index') }}">Админ-панель</a>
+                        </li>
                         {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 API
@@ -73,7 +75,18 @@
                 <footer class="py-3 mt-5">
                     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                         <li class="nav-item"><a href="{{ route('homepage') }}" class="nav-link px-2 text-muted">На главную</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link disabled px-2 text-muted disabled">О нас</a></li>
+                        @auth
+                            <li class="nav-item">
+                                <form action='{{ route('logout') }}' method='POST'>
+                                    @csrf
+                                    <button type='submit' class="nav-link px-2 text-muted" style='border: none; background-color: inherit;'>Выйти</button>
+                                </form>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link px-2 text-muted" href="{{ route('login') }}">Войти</a>
+                            </li>
+                        @endauth
                     </ul>
                     <p class="text-center text-muted">&copy; 2022 Blog LarA on Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
                 </footer>

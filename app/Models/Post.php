@@ -11,6 +11,15 @@ class Post extends Model
     use HasFactory;
 
     /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'image' => 'image.jpg'
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

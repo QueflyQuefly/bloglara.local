@@ -51,10 +51,12 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $validated = $request->safe();
+        $path = $request->file('postImage')->store('images');
         $post = new Post([
             'user_id' => $request->user()->id,
             'title' => $validated['postTitle'],
             'content' => $validated['postContent'],
+            'image' => $path,
         ]);
         $post->saveOrFail();
 
