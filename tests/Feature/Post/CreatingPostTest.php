@@ -17,7 +17,9 @@ class CreatingPostTest extends TestCase
         /** @var Authenticatable $user */
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get('/post/create');
+        $response = $this
+            ->actingAs($user)
+            ->get('/post/create');
 
         $response->assertStatus(200);
     }
@@ -27,10 +29,12 @@ class CreatingPostTest extends TestCase
         /** @var Authenticatable $user */
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->post('/post/store', [
-            'postTitle' => 'Test Post Title',
-            'postContent' => 'Test Post Content',
-        ]);
+        $response = $this
+            ->actingAs($user)
+            ->post('/post/store', [
+                'postTitle' => 'Test Post Title',
+                'postContent' => 'Test Post Content',
+            ]);
 
         $response->assertRedirect(RouteServiceProvider::HOME);
     }

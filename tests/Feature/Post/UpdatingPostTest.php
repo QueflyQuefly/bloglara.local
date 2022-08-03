@@ -2,18 +2,17 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Models\User;
 use App\Models\Post;
-use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CreatingCommentTest extends TestCase
+class UpdatingPostTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_creating_comment_screen_can_be_rendered()
+    public function test_editing_post_screen_can_be_rendered()
     {
         /** @var Authenticatable $user */
         $user = User::factory()->create();
@@ -21,12 +20,12 @@ class CreatingCommentTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get(sprintf('/comment/create/%d', $post->id));
+            ->get(sprintf('/post/edit/%d', $post->id));
 
         $response->assertStatus(200);
     }
 
-    public function test_users_can_create_comment()
+    public function test_users_can_update_post()
     {
         /** @var Authenticatable $user */
         $user = User::factory()->create();
@@ -34,10 +33,11 @@ class CreatingCommentTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->post(sprintf('/comment/store/%d', $post->id), [
-                'commentContent' => 'Test Comment Content',
+            ->put(sprintf('/post/update/%d', $post->id), [
+                'postTitle' => 'Test Post Title Changed',
+                'postContent' => 'Test Post Content Changed',
             ]);
-
+        
         $response->assertStatus(302);
         $response->assertRedirect();
     }
