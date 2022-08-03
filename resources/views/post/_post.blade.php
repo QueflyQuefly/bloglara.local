@@ -2,7 +2,7 @@
 <div class="card mb-3">
     <div class="row g-0">
         <div class="col-md-4">
-                <img src="/images/{{ $post['image'] }}" class="img-fluid rounded" alt="Картинка к посту">
+                <img src="{{ $post['image'] }}" class="img-fluid rounded" alt="Картинка к посту">
         </div>
         <div class="col-md-8">
             <div class="card-body">

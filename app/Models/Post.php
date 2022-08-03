@@ -16,7 +16,7 @@ class Post extends Model
      * @var array
      */
     protected $attributes = [
-        'image' => 'image.jpg'
+        'image' => '/images/image.jpg'
     ];
 
     /**
@@ -24,7 +24,12 @@ class Post extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'title', 'content'];
+    protected $fillable = [
+        'user_id',
+        'title',
+        'content',
+        'image'
+    ];
 
     /**
      * The accessors to append to the model's array form.

@@ -26,7 +26,7 @@ class StorePostRequest extends FormRequest
         return [
             'postTitle' => 'bail|required|min:1|max:120',
             'postContent' => 'bail|required|min:1|max:30000',
-            'postImage' => 'bail|required|min:1|max:15000',
+            'postImage' => 'bail|required|image|min:1|max:15000',
             'postCheck' => 'required',
         ];
     }

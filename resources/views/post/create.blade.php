@@ -5,7 +5,7 @@
 @section('h1', 'Форма добавления поста')
 
 @section('content')
-    <form action='{{ route('post.store') }}' method="POST">
+    <form action='{{ route('post.store') }}' method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="postTitle" class="form-label">Заголовок</label>
