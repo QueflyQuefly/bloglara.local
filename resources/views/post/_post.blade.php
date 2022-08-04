@@ -12,8 +12,8 @@
                         <small class="text-muted">Изменен {{ $post['updated_at'] }}</small>
                     </p>
                     <p class="card-text">
-                        @if(strlen($post['content'] > 201))
-                            {{ substr($post['content'], 0, 200) . '...' }}
+                        @if(mb_strlen($post['content'] > 201))
+                            {{ mb_substr($post['content'], 0, 200) . '...' }}
                         @else 
                             {{ $post['content'] }}
                         @endif

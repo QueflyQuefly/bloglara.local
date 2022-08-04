@@ -24,9 +24,9 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'postTitle' => 'bail|required|min:1|max:120',
-            'postContent' => 'bail|required|min:1|max:30000',
-            'postCheck' => 'required',
+            'postTitle' => ['bail', 'required', 'min:1', 'max:120'],
+            'postContent' => ['bail', 'required', 'min:1', 'max:30000'],
+            'postCheck' => ['required'],
         ];
     }
 

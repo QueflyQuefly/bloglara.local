@@ -20,7 +20,9 @@
     </div>
 
     <div class='py-4'>
-        <img src="/storage/{{ $post['image'] }}" class="img-fluid" alt="Картинка к посту">
+        <a href="/storage/{{ $post['image'] }}" target="_blank" title="Открыть в новой вкладке">
+            <img src="/storage/{{ $post['image'] }}" class="img-fluid border" alt="Картинка к посту">
+        </a>
     </div>
 
     <p class="mb-3" style="font-family: 'Tahoma';">{!! nl2br($post->content) !!}</p>

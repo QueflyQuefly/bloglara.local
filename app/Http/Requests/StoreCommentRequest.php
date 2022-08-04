@@ -24,8 +24,8 @@ class StoreCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'commentContent' => 'bail|required|min:1|max:30000',
-            'commentCheck' => 'required',
+            'commentContent' => ['bail', 'required', 'min:1', 'max:30000'],
+            'commentCheck' => ['required'],
         ];
     }
 

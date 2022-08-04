@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class StorePostRequest extends FormRequest
 {
@@ -24,10 +26,15 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'postTitle' => 'bail|required|min:1|max:120',
-            'postContent' => 'bail|required|min:1|max:30000',
-            'postImage' => 'bail|image|min:1|max:1024', // |required
-            'postCheck' => 'required',
+            'postTitle' => ['bail', 'required', 'min:1', 'max:120'],
+            'postContent' => ['bail', 'required', 'min:1', 'max:30000'],
+            'postImage' => [
+                File::image()
+                    ->min(100)
+                    ->max(1024)
+                    ->dimensions(Rule::dimensions()->maxWidth(2000)->maxHeight(1100)->minWidth(1900)->minHeight(1000)),
+            ],
+            'postCheck' => ['required'],
         ];
     }
 
@@ -45,10 +52,9 @@ class StorePostRequest extends FormRequest
             'postContent.required' => 'Введите содержимое поста.',
             'postContent.min' => 'Количество символов содержимого поста ":input" должно быть больше, чем :min.',
             'postContent.max' => 'Количество символов содержимого поста ":input" должно быть меньше, чем :max.',
-            // 'postImage.required' => 'Пожалуйста, добавьте картинку',
             'postImage.image' => 'Пожалуйста, добавьте именно картинку, у выбранного файла неверное расширение',
-            'postImage.min' => 'Количество символов пути к картинке ":input" должно быть больше, чем :min.',
-            'postImage.max' => 'Количество символов пути к картинке ":input" должно быть меньше, чем :max.',
+            'postImage.between' => 'Картинкa должнa быть больше, чем :min и меньше, чем :max килобайт',
+            'postImage.dimensions' => 'Поддерживаются лишь картинки формата FullHD (1920x1080)',
             'postCheck.required' => 'Необходимо согласиться с правилами сайта.',
         ];
     }
