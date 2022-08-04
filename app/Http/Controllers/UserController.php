@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -47,6 +48,13 @@ class UserController extends Controller
      */
     public function update(RegisterRequest $request, User $user)
     {
+        /** @var User $guest */
+        $guest = Auth::user();
+
+        if ($guest->id !== $user->id && ! $guest->isAdmin()) {
+            return abort(404);
+        }
+
         $this->authorize('update', $user);
 
         $validated = $request->safe();
@@ -65,6 +73,13 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        /** @var User $guest */
+        $guest = Auth::user();
+
+        if ($guest->id !== $user->id && ! $guest->isAdmin()) {
+            return abort(404);
+        } 
+
         $user->delete();
 
         return redirect(route('homepage'));

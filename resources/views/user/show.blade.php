@@ -30,10 +30,11 @@
         </div>
     @endcanany
 
+    <p class="lead">Посты пользователя {{ $user->name }} ({{ count($user->comments) }}):</p>
     @each('post._post', $user->posts, 'post', 'post._empty')
 
     <div class="py-3">
-        <p class="lead">Комментарии ({{ count($user->comments) }}):</p>
+        <p class="lead">Комментарии пользователя {{ $user->name }} ({{ count($user->comments) }}):</p>
 
         @each('comment._comment', $user->comments, 'comment', 'comment._empty')
     </div>

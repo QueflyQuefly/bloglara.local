@@ -73,10 +73,13 @@ Route::controller(AdminController::class)->group(function () {
 Route::controller(UserController::class)->group(function () {
     Route::prefix('user')->group(function () {
         Route::name('user.')->group(function () {
-            Route::get('/user', 'show')->name('show');
-            Route::get('edit/{user}', 'edit')->whereNumber('user')->name('edit');
-            Route::put('update/{user}', 'update')->whereNumber('user')->name('update');
-            Route::delete('delete/{user}', 'destroy')->whereNumber('user')->name('delete');
+            Route::get('/user/{user}', 'show')->whereNumber('user')->name('show');
+
+            Route::middleware('auth')->group(function () {
+                Route::get('edit/{user}', 'edit')->whereNumber('user')->name('edit');
+                Route::put('update/{user}', 'update')->whereNumber('user')->name('update');
+                Route::delete('delete/{user}', 'destroy')->whereNumber('user')->name('delete');
+            });
         });
     });
 });
