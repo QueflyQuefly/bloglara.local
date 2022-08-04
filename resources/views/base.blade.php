@@ -41,9 +41,18 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('post.create') }}">Создать пост</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.index') }}">Админ-панель</a>
-                        </li>
+
+                        @if (Auth::check() && Auth::user()->hasRole('ROLE_ADMIN'))
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Админ-панель
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('admin.index') }}">Админ-панель</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
                         {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 API

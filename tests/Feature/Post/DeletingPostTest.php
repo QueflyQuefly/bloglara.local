@@ -26,6 +26,7 @@ class DeletingPostTest extends TestCase
             ->actingAs($user2)
             ->delete(sprintf('/post/delete/%d', $post->id));
 
+        $this->assertModelExists($post);
         $response->assertStatus(403);
     }
 
@@ -39,6 +40,7 @@ class DeletingPostTest extends TestCase
             ->actingAs($user)
             ->delete(sprintf('/post/delete/%d', $post->id));
 
+        $this->assertModelMissing($post);
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }

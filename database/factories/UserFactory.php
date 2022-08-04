@@ -19,7 +19,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->firstName() . ' ' . fake()->lastName(),
+            'name' => fake()->name(),
             'email' => fake()->safeEmail(),
             'roles' => '["' . User::ROLE_USER . '"]',
             'email_verified_at' => now(),

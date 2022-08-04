@@ -31,6 +31,7 @@ class DeletingCommentTest extends TestCase
             ->actingAs($user2)
             ->delete(sprintf('/comment/delete/%d', $comment->id));
 
+        $this->assertModelExists($comment);
         $response->assertStatus(403);
     }
 
@@ -48,6 +49,7 @@ class DeletingCommentTest extends TestCase
             ->actingAs($user)
             ->delete(sprintf('/comment/delete/%d', $comment->id));
 
+        $this->assertModelMissing($comment);
         $response->assertStatus(302);
         $response->assertRedirect();
     }
