@@ -13,8 +13,7 @@
         </p>
         <p class="card-text">{{ $comment['content'] }}</p>
 
-        @auth
-        @if (Auth::user()->id === $comment['user_id'])
+        @if (Auth::check() && ((Auth::user()->id === $comment['user_id']) || Auth::user()->isAdmin()))
             <form action='{{ route('comment.delete', ['comment' => $comment['id']]) }}'  method="POST">
                 @method('DELETE')
                 @csrf
@@ -22,6 +21,5 @@
                 <button type="submit" class="btn btn-secondary float-end">Удалить</button>
             </form>
         @endif
-        @endauth
     </div>
 </div>

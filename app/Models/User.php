@@ -81,4 +81,12 @@ class User extends Authenticatable
     {
         return strpos($this->roles, $role) !== false;
     }
+
+    /**
+     * User is Administrator?
+     */
+    public function isAdmin()
+    {
+        return strpos($this->roles, self::ROLE_ADMIN) !== false;
+    }
 }

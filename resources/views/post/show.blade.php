@@ -27,7 +27,7 @@
 
     <p class="mb-3" style="font-family: 'Tahoma';">{!! nl2br($post->content) !!}</p>
 
-    @canany(['update', 'delete'], $post)     
+    @if (Auth::check() && ((Auth::user()->id === $comment['user_id']) || Auth::user()->isAdmin()))
         <div class="mb-5">
             <form action='{{ route('post.delete', ['post' => $post]) }}'  method="POST">
                 @method('DELETE')
@@ -36,7 +36,7 @@
                 <button type="submit" class="btn btn-secondary float-end">Удалить пост</button>
             </form>
         </div>
-    @endcanany
+    @endif
 
     <div class="py-5">
         @include('comment._create')

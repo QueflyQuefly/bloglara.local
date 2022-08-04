@@ -7,8 +7,8 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">
-                        @if(mb_strlen($post['title'] > 101))
-                            {{ mb_substr($post['title'], 0, 100) . '...' }}
+                        @if(mb_strlen($post['title'] > 91))
+                            {{ mb_substr($post['title'], 0, 90) . '...' }}
                         @else 
                             {{ $post['title'] }}
                         @endif
