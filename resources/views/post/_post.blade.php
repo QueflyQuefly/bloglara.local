@@ -6,14 +6,20 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $post['title'] }}</h5>
+                    <h5 class="card-title">
+                        @if(mb_strlen($post['title'] > 101))
+                            {{ mb_substr($post['title'], 0, 100) . '...' }}
+                        @else 
+                            {{ $post['title'] }}
+                        @endif
+                    </h5>
                     <p class="card-text mx-3 mb-1">
                         <small>Автор: {{ $post['author'] }}. </small> 
                         <small class="text-muted">Изменен {{ $post['updated_at'] }}</small>
                     </p>
                     <p class="card-text">
-                        @if(mb_strlen($post['content'] > 201))
-                            {{ mb_substr($post['content'], 0, 200) . '...' }}
+                        @if(mb_strlen($post['content'] > 121))
+                            {{ mb_substr($post['content'], 0, 120) . '...' }}
                         @else 
                             {{ $post['content'] }}
                         @endif

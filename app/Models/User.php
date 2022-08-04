@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const ROLE_USER = 'ROLE_USER';
+
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
+
     /**
      * The model's default values for attributes.
      *

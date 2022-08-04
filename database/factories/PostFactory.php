@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +19,24 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->name(),
-            'content' => fake()->text(),
+            'user_id' => random_int(100, 100),
+            'title' => fake()->realTextBetween(70, 120),
+            'content' => fake()->realTextBetween(200, 500),
+            'image' => Post::DEFAULT_IMAGE_PATH,
         ];
+    }
+
+    /**
+     * With User Model
+     *
+     * @return static
+     */
+    public function withUser()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'user_id' => User::factory(),
+            ];
+        });
     }
 }

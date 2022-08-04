@@ -19,9 +19,9 @@
         </div>
         <div class="input-group mb-1">
             <input type="file" class="form-control" id="postImage" name="postImage">
-            <label class="input-group-text" for="postImage">Загрузите картинку для поста</label>
+            <label class="input-group-text" for="postImage">Картинка для поста</label>
         </div>
-        <div id="imageHelp" class="form-text">Если вы не выберите картинку, будет установлена картинка по умолчанию</div>
+        <div id="imageHelp" class="form-text">Картинка должна быть в формате FullHd, менее одного мегабайта, если вы не выберите картинку, будет установлена картинка по умолчанию</div>
         <div class="mt-3 mb-3 form-check">
             <input type="checkbox" name='postCheck' class="form-check-input" id="postCheck" required>
             <label class="form-check-label" for="postCheck">Согласен с правилами сайта</label>

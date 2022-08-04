@@ -7,10 +7,6 @@ use Illuminate\Support\Facades\Auth;
  
 class EnsureUserHasRole
 {
-    public const ADMIN = 'ROLE_ADMIN';
-
-    public const MODERATOR = 'ROLE_MODERATOR';
-
     /**
      * Handle the incoming request.
      *

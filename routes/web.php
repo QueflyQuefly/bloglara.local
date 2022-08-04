@@ -3,7 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
-use App\Http\Middleware\EnsureUserHasRole;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +50,7 @@ Route::controller(CommentController::class)->group(function () {
 Route::controller(AdminController::class)->group(function () {
     Route::prefix('admin')->group(function () {
         Route::name('admin.')->group(function () {
-            Route::get('/', 'index')->middleware(sprintf('role:ROLE_ADMIN', EnsureUserHasRole::ADMIN))->name('index');
+            Route::get('/', 'index')->middleware(sprintf('role:ROLE_ADMIN', User::ROLE_ADMIN))->name('index');
         });
     });
 });
