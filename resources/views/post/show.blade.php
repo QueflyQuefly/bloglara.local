@@ -23,7 +23,7 @@
         <img src="/storage/{{ $post['image'] }}" class="img-fluid" alt="Картинка к посту">
     </div>
 
-    <p class="mb-3" style="font-family: 'Tahoma';">{{ $post->content }}</p>
+    <p class="mb-3" style="font-family: 'Tahoma';">{!! nl2br($post->content) !!}</p>
 
     @canany(['update', 'delete'], $post)     
         <div class="mb-5">
@@ -40,13 +40,8 @@
         @include('comment._create')
     </div>
     <div class="py-3">
-        @if (!empty($comments[0]))
-            <p class="lead">Комментарии ({{ count($comments) }}):</p>
-            @foreach ($comments as $comment)
-                @include('comment._comment')
-            @endforeach
-        @else
-            <p class="lead">Пока никто не оставил комментарий. Будьте первым!</p>
-        @endif
+        <p class="lead">Комментарии ({{ count($comments) }}):</p>
+
+        @each('comment._comment', $comments, 'comment', 'comment._empty')
     </div>
 @endsection

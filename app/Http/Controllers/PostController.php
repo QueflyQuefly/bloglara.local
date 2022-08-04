@@ -52,12 +52,17 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $validated = $request->safe();
-        $path = $request->file('postImage')->store('images');
+        $pathToImage = Post::DEFAULT_IMAGE_PATH;
+
+        if ($request->hasFile('postImage')) {
+            $pathToImage = $request->file('postImage')->store('images');
+        }
+
         $post = new Post([
             'user_id' => $request->user()->id,
             'title' => $validated['postTitle'],
             'content' => $validated['postContent'],
-            'image' => $path,
+            'image' => $pathToImage,
         ]);
         $post->saveOrFail();
 
@@ -130,7 +135,11 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $this->authorize('delete', $post);
-        Storage::delete($post->image);
+
+        if ($post->image !== Post::DEFAULT_IMAGE_PATH) {
+            Storage::delete($post->image);
+        }
+
         $post->delete();
 
         return redirect(route('homepage'));

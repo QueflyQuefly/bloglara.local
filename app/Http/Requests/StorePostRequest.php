@@ -26,7 +26,7 @@ class StorePostRequest extends FormRequest
         return [
             'postTitle' => 'bail|required|min:1|max:120',
             'postContent' => 'bail|required|min:1|max:30000',
-            'postImage' => 'bail|required|image|min:1|max:15000',
+            'postImage' => 'bail|image|min:1|max:1024', // |required
             'postCheck' => 'required',
         ];
     }
@@ -45,6 +45,10 @@ class StorePostRequest extends FormRequest
             'postContent.required' => 'Введите содержимое поста.',
             'postContent.min' => 'Количество символов содержимого поста ":input" должно быть больше, чем :min.',
             'postContent.max' => 'Количество символов содержимого поста ":input" должно быть меньше, чем :max.',
+            // 'postImage.required' => 'Пожалуйста, добавьте картинку',
+            'postImage.image' => 'Пожалуйста, добавьте именно картинку, у выбранного файла неверное расширение',
+            'postImage.min' => 'Количество символов пути к картинке ":input" должно быть больше, чем :min.',
+            'postImage.max' => 'Количество символов пути к картинке ":input" должно быть меньше, чем :max.',
             'postCheck.required' => 'Необходимо согласиться с правилами сайта.',
         ];
     }
