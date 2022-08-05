@@ -34,7 +34,7 @@ class SeederTest extends TestCase
      *
      * @return void
      */
-    public function test_seeders()
+    public function test_users_posts_comments_can_be_created_by_seeders()
     {
         $this->seed([
             PostSeeder::class,
@@ -52,7 +52,7 @@ class SeederTest extends TestCase
      *
      * @return void
      */
-    public function test_user_can_be_created_by_seeder()
+    public function test_user_can_be_created_by_factory()
     {
         $user = User::factory()->create();
  
@@ -64,7 +64,7 @@ class SeederTest extends TestCase
      *
      * @return void
      */
-    public function test_post_can_be_created_by_seeder()
+    public function test_post_can_be_created_by_factory()
     {
         $post = Post::factory()->create();
  
@@ -76,7 +76,7 @@ class SeederTest extends TestCase
      *
      * @return void
      */
-    public function test_comment_can_be_created_by_seeder()
+    public function test_comment_can_be_created_by_factory()
     {
         $comment = Comment::factory()->create();
  
