@@ -19,9 +19,9 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => random_int(100, 100),
-            'title' => fake()->realTextBetween(70, 120),
-            'content' => fake()->realTextBetween(200, 500),
+            'user_id' => random_int(1, 100),
+            'title' => fake()->realTextBetween(50, 100),
+            'content' => fake()->realTextBetween(500, 1000),
             'image' => Post::DEFAULT_IMAGE_PATH,
         ];
     }

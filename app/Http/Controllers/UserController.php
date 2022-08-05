@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Comment;
+use App\Models\Post;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,15 +17,43 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(?User $user, Request $request)
+    public function show(User $user)
     {
-        $user ?? $request->user();
+        $jsonPosts = Cache::remember(
+            sprintf('user_%s_posts', $user->id), 
+            now()->addSeconds(15),
+            function () use ($user) {
+                $posts = Post::latest()
+                    ->where('user_id', $user->id)
+                    ->take(10)
+                    ->get();
 
-        if (empty($user)) {
-            return redirect(route('homepage'));
-        }
+                return $posts->toJson();
+            }
+        );
 
-        return view('user.show', ['user' => $user]);
+        $posts = json_decode($jsonPosts, true);
+
+        $jsonComments = Cache::remember(
+            sprintf('user_%s_comments', $user->id), 
+            now()->addSeconds(15), 
+            function () use ($user) {
+                $comments = Comment::latest()
+                    ->where('user_id', $user->id)
+                    ->take(10)
+                    ->get();
+
+                return $comments->toJson();
+            }
+        );
+
+        $comments = json_decode($jsonComments, true);
+
+        return view('user.show', [
+            'user' => $user,
+            'posts' => $posts,
+            'comments' => $comments,
+        ]);
     }
 
         /**
@@ -46,21 +76,15 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(RegisterRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        /** @var User $guest */
-        $guest = Auth::user();
-
-        if ($guest->id !== $user->id && ! $guest->isAdmin()) {
-            return abort(404);
-        }
-
         $this->authorize('update', $user);
 
         $validated = $request->safe();
-        $user->title = $validated['userTitle'];
-        $user->content = $validated['userContent'];
-        $user->update();
+        $user->update([
+            'name' => $validated['name'],
+            'password' => Hash::make($validated['password']),
+        ]);
 
         return redirect(route('user.show', ['user' => $user]));
     }
@@ -73,12 +97,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        /** @var User $guest */
-        $guest = Auth::user();
-
-        if ($guest->id !== $user->id && ! $guest->isAdmin()) {
-            return abort(404);
-        } 
+        $this->authorize('delete', $user);
 
         $user->delete();
 

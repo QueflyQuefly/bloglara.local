@@ -4,14 +4,17 @@
             <li class="nav-item"><a href="{{ route('homepage') }}" class="nav-link px-2 text-muted">На главную</a></li>
             @auth
                 <li class="nav-item">
+                    <a class="nav-link px-3 text-muted" href="{{ route('user.show', ['user' => Auth::user()]) }}">Профиль</a>
+                </li>
+                <li class="nav-item">
                     <form action='{{ route('logout') }}' method='POST'>
                         @csrf
-                        <button type='submit' class="nav-link px-2 text-muted" style='border: none; background-color: inherit;'>Выйти</button>
+                        <button type='submit' class="nav-link px-3 text-muted" style='border: none; background-color: inherit;'>Выйти</button>
                     </form>
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link px-2 text-muted" href="{{ route('login') }}">Войти</a>
+                    <a class="nav-link px-3 text-muted" href="{{ route('login') }}">Войти</a>
                 </li>
             @endauth
         </ul>

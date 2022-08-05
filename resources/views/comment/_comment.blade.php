@@ -1,6 +1,10 @@
 <div class="card mb-3">
     <div class="card-body">
-        <h5 class="card-title">{{ $comment['author'] }}</h5>
+        <h5 class="card-title">
+            <a href="{{ route('user.show', ['user' => $comment['user_id']]) }}" class="nav-link">
+                {{ $comment['author'] }}
+            </a>
+        </h5>
         <p class="card-text mx-3">
             <small class="text-muted">
                 @if ($comment['updated_at'] === $comment['created_at'])

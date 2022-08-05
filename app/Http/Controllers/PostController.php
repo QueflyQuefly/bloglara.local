@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 // use Illuminate\Support\Facades\Redis;
@@ -14,23 +15,52 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     /**
+     * Display a homepage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function homepage()
+    {
+        $jsonLastPosts = Cache::remember('last_posts', now()->addSeconds(15), function () {
+            $lastPosts = Post::latest('id')
+                ->take(5)
+                ->get();
+
+            return $lastPosts->toJson();
+        });
+
+        $lastPosts = json_decode($jsonLastPosts, true);
+
+        $jsonMoreTalkedPosts = Cache::remember('more_talked_posts', now()->addSeconds(15), function () {
+            $moreTalkedPosts = Post::distinct()
+                ->select(DB::raw('posts.*, (SELECT COUNT(comments.id) FROM comments WHERE posts.id = comments.post_id) AS count_comments'))
+                ->join('comments', 'posts.id', '=', 'comments.post_id')
+                ->where('comments.created_at', '>', (new \DateTime('-1 week'))->format('YmdHis'))
+                ->orderBy('count_comments', 'DESC')
+                ->take(3)
+                ->get();
+
+            return $moreTalkedPosts->toJson();
+        });
+
+        $moreTalkedPosts = json_decode($jsonMoreTalkedPosts, true);
+
+        return view('homepage', [
+            'lastPosts' => $lastPosts,
+            'moreTalkedPosts' => $moreTalkedPosts,
+        ]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $jsonString = Cache::remember('last_posts', now()->addSeconds(15), function () {
-            $posts = Post::orderBy('id', 'desc')
-                ->take(10)
-                ->get();
-
-            return $posts->toJson();
-        });
-
-        $posts = json_decode($jsonString, true);
-
-        return view('homepage', ['posts' => $posts]);
+        $posts = Post::latest()->paginate(10);
+        
+        return view('post.index', ['posts' => $posts]);
     }
 
     /**
@@ -118,10 +148,16 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
+        if ($request->hasFile('postImage')) {
+            $pathToImage = $request->file('postImage')->store('images');
+            $post->image = $pathToImage;
+        }
+
         $validated = $request->safe();
-        $post->title = $validated['postTitle'];
-        $post->content = $validated['postContent'];
-        $post->update();
+        $post->update([
+            'title' => $validated['postTitle'],
+            'content' => $validated['postContent']
+        ]);
 
         return redirect(route('post.show', ['post' => $post]));
     }

@@ -19,8 +19,8 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => random_int(100, 100),
-            'post_id' => random_int(100, 100),
+            'user_id' => random_int(1, 100),
+            'post_id' => random_int(1, 100),
             'content' => fake()->realTextBetween(100, 250),
         ];
     }

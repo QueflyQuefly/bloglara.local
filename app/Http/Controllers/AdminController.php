@@ -21,7 +21,7 @@ class AdminController extends Controller
      */
     public function showUsers()
     {
-        $users = User::orderBy('id', 'DESC')->paginate(10);
+        $users = User::latest()->paginate(10);
         
         return view('admin.users', ['users' => $users]);
     }
@@ -31,7 +31,7 @@ class AdminController extends Controller
      */
     public function showPosts()
     {
-        $posts = Post::orderBy('id', 'DESC')->paginate(10);
+        $posts = Post::latest()->paginate(10);
         
         return view('admin.posts', ['posts' => $posts]);
     }
@@ -41,7 +41,7 @@ class AdminController extends Controller
      */
     public function showComments()
     {
-        $comments = Comment::orderBy('id', 'DESC')->paginate(10);
+        $comments = Comment::latest()->paginate(10);
         
         return view('admin.comments', ['comments' => $comments]);
     }

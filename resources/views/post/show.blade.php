@@ -8,14 +8,17 @@
 
 @section('content')
     <div class='mx-5 py-1'>
-        <p><small>Автор: {{ $post->user->name }}</small> <br />
+        <p>
+            <a href="{{ route('user.show', ['user' => $post['user_id']]) }}" class="nav-link">
+                Автор: {{ $post->user->name }}
+            </a>
 
-        @if ($post->updated_at === $post->created_at)
-            <small class="text-muted">Дата создания {{ $post->created_at }}</small>
-        @else
-            <small class="text-muted">Последнее изменение {{ $post->updated_at }}</small> <br />
-            <small class="text-muted">Дата создания {{ $post->created_at }}</small>
-        @endif
+            @if ($post->updated_at === $post->created_at)
+                <small class="text-muted">Дата создания {{ $post->created_at }}</small>
+            @else
+                <small class="text-muted">Последнее изменение {{ $post->updated_at }}</small> <br />
+                <small class="text-muted">Дата создания {{ $post->created_at }}</small>
+            @endif
         </p>
     </div>
 
@@ -27,7 +30,7 @@
 
     <p class="mb-3" style="font-family: 'Tahoma';">{!! nl2br($post->content) !!}</p>
 
-    @if (Auth::check() && ((Auth::user()->id === $comment['user_id']) || Auth::user()->isAdmin()))
+    @if (Auth::check() && ((Auth::user()->id === $post['user_id']) || Auth::user()->isAdmin()))
         <div class="mb-5">
             <form action='{{ route('post.delete', ['post' => $post]) }}'  method="POST">
                 @method('DELETE')

@@ -7,27 +7,19 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Web Routes
 
 require __DIR__.'/auth.php';
 
 Route::controller(PostController::class)->group(function () {
     
-    Route::get('/', 'index')->name('homepage');
+    Route::get('/', 'homepage')->name('homepage');
 
     Route::prefix('post')->group(function () {
         Route::name('post.')->group(function () {
 
             Route::get('{post}', 'show')->whereNumber('post')->name('show');
+            Route::get('index', 'index')->name('index');
 
             Route::middleware('auth')->group(function () {
                 Route::get('create', 'create')->name('create');
@@ -73,7 +65,8 @@ Route::controller(AdminController::class)->group(function () {
 Route::controller(UserController::class)->group(function () {
     Route::prefix('user')->group(function () {
         Route::name('user.')->group(function () {
-            Route::get('/user/{user}', 'show')->whereNumber('user')->name('show');
+
+            Route::get('{user}', 'show')->whereNumber('user')->name('show');
 
             Route::middleware('auth')->group(function () {
                 Route::get('edit/{user}', 'edit')->whereNumber('user')->name('edit');

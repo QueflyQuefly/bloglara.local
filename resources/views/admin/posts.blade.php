@@ -28,7 +28,11 @@
                             <th scope="row"> 
                                 <a href="{{ route('post.show', ['post' => $post['id']]) }}" class="nav-link">{{ $post['id'] }}</a>
                             </th>
-                            <td>{{ $post['author'] }}</td>
+                            <td>
+                                <a href="{{ route('user.show', ['user' => $post['user_id']]) }}" class="nav-link">
+                                    {{ $post['author'] }}
+                                </a>
+                            </td>
                             <td>
                                 @if(mb_strlen($post['title'] > 91))
                                     {{ mb_substr($post['title'], 0, 90) . '...' }}

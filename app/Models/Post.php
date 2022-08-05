@@ -74,7 +74,13 @@ class Post extends Model
     protected function author(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->user->name,
+            get: function () {
+                if ($this->user) {
+                    return $this->user->name;
+                }
+
+                return 'Account deleted';
+            },
         );
     }
 

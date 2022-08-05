@@ -8,7 +8,7 @@
 
 @section('content')
     <div class='mx-5 py-1'>
-        <p><small>E-mail: {{ $user->email }}</small> <br />
+        <p>E-mail: {{ $user->email }} <br />
 
         @if ($user->updated_at === $user->created_at)
             <small class="text-muted">Дата создания профиля {{ $user->created_at }}</small>
@@ -20,22 +20,39 @@
     </div>
 
     @canany(['update', 'delete'], $user)     
-        <div class="mb-5">
+        <div class="pb-5">
             <form action='{{ route('user.delete', ['user' => $user]) }}'  method="USER">
                 @method('DELETE')
                 @csrf
-                <a href='{{ route('user.edit', ['user' => $user]) }}' class="btn btn-primary float-start">Изменить</a>
-                <button type="submit" class="btn btn-secondary float-end">Удалить пользователя</button>
+                <a href='{{ route('user.edit', ['user' => $user]) }}' class="btn btn-primary float-start">Изменить данные аккаунта</a>
+                <button type="submit" class="btn btn-secondary float-end">Удалить аккаунт</button>
             </form>
         </div>
     @endcanany
 
-    <p class="lead">Посты пользователя {{ $user->name }} ({{ count($user->comments) }}):</p>
-    @each('post._post', $user->posts, 'post', 'post._empty')
+    <div class="mt-5">
+        <p class="h4 text-center">Посты пользователя 
+            @if (count($posts) < 10)
+                (всего
+            @else
+                (последние 
+            @endif
+            {{ count($posts) }}):
+        </p>
 
-    <div class="py-3">
-        <p class="lead">Комментарии пользователя {{ $user->name }} ({{ count($user->comments) }}):</p>
+        @each('post._post', $posts, 'post', 'post._empty')
+    </div>
 
-        @each('comment._comment', $user->comments, 'comment', 'comment._empty')
+    <div class="mt-5">
+        <p class="h4 text-center">Комментарии пользователя
+            @if (count($comments) < 10)
+                (всего
+            @else
+                (последние 
+            @endif
+            {{ count($comments) }}):
+        </p>
+
+        @each('comment._comment', $comments, 'comment', 'comment._empty')
     </div>
 @endsection
