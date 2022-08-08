@@ -17,6 +17,8 @@ class User extends Authenticatable
 
     public const ROLE_ADMIN = 'ROLE_ADMIN';
 
+    public const ADMIN_EMAIL = 'admin@admin';
+
     /**
      * The model's default values for attributes.
      *

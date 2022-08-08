@@ -16,6 +16,9 @@
                 <li class="nav-item">
                     <a class="nav-link px-3 text-muted" href="{{ route('login') }}">Войти</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 text-muted" href="{{ route('register') }}">Регистрация</a>
+                </li>
             @endauth
         </ul>
         <p class="text-center text-muted">&copy; 2022 Blog LarA on Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>

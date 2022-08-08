@@ -20,6 +20,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        if (User::where('email', User::ADMIN_EMAIL)->doesntExist()) {
+            User::factory()
+                ->state([
+                    'email' => User::ADMIN_EMAIL,
+                    'roles' => '["' . User::ROLE_ADMIN . '"]'
+                ])
+                ->create();
+        }
+
         $users = User::factory()
             ->count(10)
             ->state(new Sequence(
