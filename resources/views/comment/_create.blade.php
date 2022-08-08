@@ -6,7 +6,7 @@
         <textarea name='commentContent' class="form-control" id="commentContent" aria-describedby="textareaHelp" style='height: 6rem' placeholder="Введите содержимое комментария" required>{{ old('commentContent') }}</textarea>
         <div id="textareaHelp" class="form-text">Количество символов: от 1 до 30000</div>
     </div>
-    <div class="mb-3 form-check">
+    <div class="form-check">
         <input type="checkbox" name='commentCheck' class="form-check-input" id="commentCheck" required>
         <label class="form-check-label" for="commentCheck">Согласен с правилами сайта</label>
     </div>

@@ -14,9 +14,16 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Post $post)
     {
-        //
+        $comments = Comment::latest('id')
+            ->where('post_id', $post->id)
+            ->paginate(10);
+        
+        return view('comment.index', [
+            'post' => $post,
+            'comments' => $comments,
+        ]);
     }
 
     /**

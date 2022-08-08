@@ -1,23 +1,25 @@
 @extends('base')
 
-@section('title', 'Блог ЛарА - Пост')
+@section('title')
+Блог ЛарА - {{ substr($post['title'], 0, 50) }}
+@endsection
 
 @section('h1')
-    {{ $post->title }}
+    {{ $post['title'] }}
 @endsection
 
 @section('content')
     <div class='mx-5 py-1'>
         <p>
             <a href="{{ route('user.show', ['user' => $post['user_id']]) }}" class="nav-link">
-                Автор: {{ $post->user->name }}
+                Автор: {{ $post['author'] }}
             </a>
 
-            @if ($post->updated_at === $post->created_at)
-                <small class="text-muted">Дата создания {{ $post->created_at }}</small>
+            @if ($post['updated_at'] === $post['created_at'])
+                <small class="text-muted">Дата создания {{ $post['created_at'] }}</small>
             @else
-                <small class="text-muted">Последнее изменение {{ $post->updated_at }}</small> <br />
-                <small class="text-muted">Дата создания {{ $post->created_at }}</small>
+                <small class="text-muted">Последнее изменение {{ $post['updated_at'] }}</small> <br />
+                <small class="text-muted">Дата создания {{ $post['created_at'] }}</small>
             @endif
         </p>
     </div>
@@ -28,7 +30,7 @@
         </a>
     </div>
 
-    <p class="mb-3" style="font-family: 'Tahoma';">{!! nl2br($post->content) !!}</p>
+    <p class="mb-3" style="font-family: 'Tahoma';">{!! nl2br($post['content']) !!}</p>
 
     @if (Auth::check() && ((Auth::user()->id === $post['user_id']) || Auth::user()->isAdmin()))
         <div class="mb-5">
@@ -45,8 +47,30 @@
         @include('comment._create')
     </div>
     <div class="py-3">
-        <p class="lead">Комментарии ({{ count($comments) }}):</p>
+        <p class="lead">Комментарии
+            @if (count($comments) < 10)
+                (всего {{ count($comments) }})
+            @endif
+            :
+        </p>
+        @if (count($comments) >= 10)
+            <p>
+                Показаны последние 10 комментариев. 
+                <a href="{{ route('comment.index', ['post' => $post]) }}">
+                    Посмотреть все
+                </a>
+            </p>
+        @endif
 
         @each('comment._comment', $comments, 'comment', 'comment._empty')
+
+        @if (count($comments) >= 10)
+            <p class="lead">
+                Показаны последние 10 комментариев. 
+                <a href="{{ route('comment.index', ['post' => $post]) }}">
+                    Посмотреть все
+                </a>
+            </p>
+        @endif
     </div>
 @endsection

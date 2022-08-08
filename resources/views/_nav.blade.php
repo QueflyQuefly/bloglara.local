@@ -12,7 +12,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('post.create') }}">Создать пост</a>
                 </li>
-
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Поиск
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('search.index') }}">Главная</a></li>
+                        <li><a class="dropdown-item" href="{{ route('search.users') }}">Пользователи</a></li>
+                        <li><a class="dropdown-item" href="{{ route('search.posts') }}">Посты</a></li>
+                        <li><a class="dropdown-item" href="{{ route('search.comments') }}">Комментарии</a></li>
+                    </ul>
+                </li>
+                
                 @auth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.show', ['user' => Auth::user()]) }}">Профиль</a>
@@ -60,10 +71,12 @@
                     </ul>
                 </li> --}}
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Поисковый запрос" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Поиск</button>
-            </form>
+            <div  id="navSearch">
+                <form class="d-flex" action="{{ route('search.index') }}" method="GET">
+                    <input class="form-control me-2" type="search" placeholder="Поисковый запрос" aria-label="Search" name="search">
+                    <button class="btn btn-outline-success" type="submit">Поиск</button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>

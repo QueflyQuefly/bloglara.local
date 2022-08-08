@@ -22,8 +22,8 @@
             <input type="file" class="form-control" id="postImage" name="postImage">
             <label class="input-group-text" for="postImage">Картинка для поста</label>
         </div>
-        <div id="imageHelp" class="form-text">Картинка должна быть в формате FullHD, менее одного мегабайта, если вы не выберите картинку, будет установлена та картинка, что была</div>
-        <div class="mb-3 form-check">
+        <div id="imageHelp" class="form-text">Картинка должна быть в формате FullHD, менее одного мегабайта. <br /> Если вы не выберите картинку, будет установлена та картинка, что была</div>
+        <div class="mt-3 form-check">
             <input type="checkbox" name='postCheck' class="form-check-input" id="postCheck" required>
             <label class="form-check-label" for="postCheck">Согласен с правилами сайта</label>
         </div>

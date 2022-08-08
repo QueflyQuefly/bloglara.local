@@ -21,7 +21,7 @@
 
     @canany(['update', 'delete'], $user)     
         <div class="pb-5">
-            <form action='{{ route('user.delete', ['user' => $user]) }}'  method="USER">
+            <form action='{{ route('user.delete', ['user' => $user]) }}'  method="POST">
                 @method('DELETE')
                 @csrf
                 <a href='{{ route('user.edit', ['user' => $user]) }}' class="btn btn-primary float-start">Изменить данные аккаунта</a>

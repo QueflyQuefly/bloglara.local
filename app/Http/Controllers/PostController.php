@@ -112,6 +112,7 @@ class PostController extends Controller
             now()->addSeconds(15),
             function () use ($post) {
                 $comments = Comment::where('post_id', $post->id)
+                    ->take(10)
                     ->orderBy('id', 'DESC')
                     ->get();
 
