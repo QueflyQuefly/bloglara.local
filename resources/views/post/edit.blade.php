@@ -8,8 +8,7 @@
     <form action='{{ route('post.update', ['post' => $post]) }}' method="POST"  enctype="multipart/form-data">
         @method('PUT')
         @csrf
-        <div class="mb-3">
-            <label for="postTitle" class="form-label">Заголовок</label>
+        <div class="form-floating mb-3">
             <input 
                 type="text" 
                 name='postTitle' 
@@ -21,7 +20,8 @@
                 maxlength="120"
                 required 
                 autofocus
-            >
+            />
+            <label for="postTitle">Заголовок</label>
             <div id="textHelp" class="form-text">Количество символов: от 1 до 120</div>
         </div>
         <div class="mb-3">

@@ -8,19 +8,45 @@
     <form method="POST" action="{{ route('user.update', ['user' => $user]) }}">
         @method('PUT')
         @csrf
-        <div class="mb-3">
-            <label for="name" class='form-label'>{{ __('Введите фамилию, имя') }}</label>
-            <input id="name" class="form-control" type="text" name="name" value="{{ $user->name }}" aria-describedby="nameHelp" required autofocus />
+        <div class="form-floating mb-3">
+            <input 
+                id="name" 
+                class="form-control" 
+                type="text" 
+                name="name" 
+                value="{{ $user->name }}" 
+                aria-describedby="nameHelp" 
+                placeholder="Email"
+                required 
+                autofocus 
+            />
+            <label for="name">{{ __('Введите фамилию, имя') }}</label>
             <div id="nameHelp" class="form-text">Количество символов: от 1 до 50</div>
         </div>
-        <div class="mb-3">
-            <label for="password" class='form-label'>{{ __('Пароль') }}</label>
-            <input id="password" class="form-control" type="password" name="password" aria-describedby="passHelp" required autocomplete="new-password" />
+        <div class="form-floating mb-3">
+            <input 
+                id="password" 
+                class="form-control" 
+                type="password" 
+                name="password" 
+                aria-describedby="passHelp" 
+                placeholder="Password"
+                required 
+                autocomplete="new-password" 
+            />
+            <label for="password">{{ __('Пароль') }}</label>
             <div id="passHelp" class="form-text">Количество символов: от 8 до 20</div>
         </div>
-        <div class="mb-3">
-            <label for="password_confirmation" class='form-label'>{{ __('Подтверждение пароля') }}</label>
-            <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required />
+        <div class="form-floating mb-3">
+            <input 
+                id="password_confirmation" 
+                class="form-control" 
+                type="password" 
+                name="password_confirmation" 
+                placeholder="Password"
+                required 
+            />
+            <label for="password_confirmation">{{ __('Подтверждение пароля') }}</label>
         </div>
 
         @include('_errors')

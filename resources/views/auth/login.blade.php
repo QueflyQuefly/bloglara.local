@@ -7,8 +7,7 @@
 @section('content')
     <form method="POST" action="{{ route('login') }}">
         @csrf
-        <div class="mb-3">
-            <label for="email" class='form-label'>Email</label>
+        <div class="form-floating mb-3">
             <input 
                 id="email" 
                 class="form-control" 
@@ -16,16 +15,15 @@
                 name="email" 
                 value="{{ old('email') }}" 
                 aria-describedby="emailHelp" 
+                placeholder="Email"
                 minlength="3"
                 maxlength="50" 
                 required 
             />
+            <label for="email">Email</label>
             <div id="emailHelp" class="form-text">Количество символов: от 1 до 50</div>
         </div>
-        <div class="mb-3">
-            <label for="password" class='form-label'>
-                {{ __('Введите пароль. ') }} <a href="{{ route('password.request') }}">{{ __(' Нажмите здесь, если забыли') }}</a>
-            </label>
+        <div class="form-floating mb-3">
             <input 
                 id="password" 
                 class="form-control" 
@@ -33,11 +31,16 @@
                 name="password" 
                 aria-describedby="passHelp" 
                 autocomplete="current-password" 
+                placeholder="Password"
                 minlength="8"
                 maxlength="20"
                 required 
             />
-            <div id="passHelp" class="form-text">Количество символов: от 8 до 20</div>
+            <label for="password">{{ __('Введите пароль. ') }}</label>
+            <div id="passHelp" class="form-text">
+                Количество символов: от 8 до 20. 
+                <a href="{{ route('password.request') }}">{{ __(' Нажмите здесь, если забыли пароль') }}</a>
+            </div>
         </div>
         <div class="mb-3">
             <label for="remember_me" class="form-label">

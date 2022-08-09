@@ -12,8 +12,16 @@
     <form method="POST" action="{{ route('password.confirm') }}">
         @csrf
         <div class="mb-3">
+            <input 
+                id="password" 
+                class="form-control" 
+                type="password" 
+                name="password" 
+                placeholder="Password"
+                required 
+                autocomplete="current-password" 
+            />
             <label for="password" class="form-label">{{ __('Введите пароль') }}</label>
-            <input id="password" class="form-control" type="password" name="password" required autocomplete="current-password" />
         </div>
 
         @include('_errors')

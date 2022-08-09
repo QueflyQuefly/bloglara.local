@@ -13,9 +13,19 @@
         @csrf
 
         <!-- Email Address -->
-        <div class='mb-3'>
-            <label for="email" class="form-label">{{ __('Email') }}</label>
-            <input id="email" class="form-control" type="email" name="email" value="{{ old('email') }}" aria-describedby="emailHelp" required autofocus />
+        <div class='form-floating mb-3'>
+            <input 
+                id="email" 
+                class="form-control" 
+                type="email" 
+                name="email" 
+                value="{{ old('email') }}" 
+                aria-describedby="emailHelp" 
+                placeholder="Email"
+                required 
+                autofocus 
+            />
+            <label for="email">{{ __('Email') }}</label>
             <div id="emailHelp" class="form-text">Введите почту, которую вы указали при регистрации</div>
         </div>
 

@@ -24,7 +24,7 @@ class SeederTest extends TestCase
     {
         $this->seed();
 
-        $this->assertDatabaseCount('users', 10);
+        $this->assertDatabaseCount('users', 11);
         $this->assertDatabaseCount('posts', 50);
         $this->assertDatabaseCount('comments', 250);
     }

@@ -13,7 +13,26 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return redirect(route('admin.posts'));
+        $maxResults = 5;
+
+        $users = User::latest('id')
+            ->take($maxResults)
+            ->get();
+
+        $posts = Post::latest('id')
+            ->take($maxResults)
+            ->get();
+        
+        $comments = Comment::latest('id')
+            ->take($maxResults)
+            ->get();
+
+        return view('admin.index', [
+            'maxResults' => $maxResults,
+            'users' => $users,
+            'posts' => $posts,
+            'comments' => $comments,
+        ]);
     }
 
     /**

@@ -7,8 +7,7 @@
 @section('content')
     <form method="POST" action="{{ route('register') }}">
         @csrf
-        <div class="mb-3">
-            <label for="name" class='form-label'>{{ __('Введите фамилию, имя') }}</label>
+        <div class="form-floating mb-3">
             <input 
                 id="name" 
                 class="form-control" 
@@ -16,15 +15,16 @@
                 name="name" 
                 value="{{ old('name') }}" 
                 aria-describedby="nameHelp" 
+                placeholder="Fio"
                 minlength="3"
                 maxlength="50"
                 required 
                 autofocus 
             />
+            <label for="name">{{ __('Введите фамилию, имя') }}</label>
             <div id="nameHelp" class="form-text">Количество символов: от 3 до 50</div>
         </div>
-        <div class="mb-3">
-            <label for="email" class='form-label'>Email</label>
+        <div class="form-floating mb-3">
             <input 
                 id="email" 
                 class="form-control" 
@@ -32,14 +32,15 @@
                 name="email" 
                 value="{{ old('email') }}" 
                 aria-describedby="emailHelp" 
+                placeholder="Email"
                 minlength="3"
                 maxlength="50"
                 required 
             />
+            <label for="email">Email</label>
             <div id="emailHelp" class="form-text">Количество символов: от 3 до 50</div>
         </div>
-        <div class="mb-3">
-            <label for="password" class='form-label'>{{ __('Пароль') }}</label>
+        <div class="form-floating mb-3">
             <input 
                 id="password" 
                 class="form-control" 
@@ -47,23 +48,26 @@
                 name="password" 
                 aria-describedby="passHelp" 
                 autocomplete="new-password" 
+                placeholder="Password"
                 minlength="8"
                 maxlength="20"
                 required 
             />
+            <label for="password">{{ __('Пароль') }}</label>
             <div id="passHelp" class="form-text">Количество символов: от 8 до 20</div>
         </div>
-        <div class="mb-3">
-            <label for="password_confirmation" class='form-label'>{{ __('Подтверждение пароля') }}</label>
+        <div class="form-floating mb-3">
             <input 
                 id="password_confirmation" 
                 class="form-control" 
                 type="password" 
                 name="password_confirmation"
+                placeholder="Password"
                 minlength="8"
                 maxlength="20" 
                 required 
             />
+            <label for="password_confirmation">{{ __('Подтверждение пароля') }}</label>
         </div>
 
         @include('_errors')

@@ -94,7 +94,7 @@ class CommentController extends Controller
         $validated = $request->safe();
         $comment->update(['content' => $validated['commentContent']]);
 
-        return redirect(route('post.show', ['post' => $comment->post]));
+        return redirect(route('post.show', ['post' => $comment->post_id]));
     }
 
     /**
