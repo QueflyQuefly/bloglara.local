@@ -53,7 +53,7 @@
             @endif
             :
         </p>
-        @if (count($comments) >= 10)
+        @if (count($comments) == 10)
             <p>
                 Показаны последние 10 комментариев. 
                 <a href="{{ route('comment.index', ['post' => $post]) }}">
@@ -64,7 +64,7 @@
 
         @each('comment._comment', $comments, 'comment', 'comment._empty')
 
-        @if (count($comments) >= 10)
+        @if (count($comments) == 10)
             <p class="lead">
                 Показаны последние 10 комментариев. 
                 <a href="{{ route('comment.index', ['post' => $post]) }}">

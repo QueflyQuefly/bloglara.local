@@ -10,7 +10,17 @@
         @csrf
         <div class="mb-3">
             <label for="commentContent" class="form-label">Содержимое комментария</label>
-            <textarea name='commentContent' class="form-control" id="commentContent" aria-describedby="textareaHelp" style='height: 10rem' placeholder="Введите содержимое комментария" required autofocus>{{ $comment->content }}</textarea>
+            <textarea 
+                name='commentContent' 
+                class="form-control" 
+                id="commentContent" 
+                aria-describedby="textareaHelp" 
+                style='height: 10rem' 
+                placeholder="Введите содержимое комментария" 
+                maxlength="30000"
+                required 
+                autofocus
+            >{{ $comment->content }}</textarea>
             <div id="textareaHelp" class="form-text">Количество символов: от 1 до 30000</div>
         </div>
         <div class="form-check">

@@ -1,4 +1,4 @@
-<p class="lead">
+<p class="lead text-center">
     Нет постов для отображения. Для создания поста 
 
     @unless (Auth::check())

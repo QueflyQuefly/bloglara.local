@@ -7,7 +7,12 @@
 @section('content')
     @include('search._search')
 
+    @include('search._check_author')
+
+    @include('_errors')
+
     @if ($comments)
+        <p class="lead text-center">Всего на странице комментариев: {{ count($comments) }} </p>
         <div class="mt-3 mb-2">
             {{ $comments->links() }}
         </div>

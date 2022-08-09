@@ -3,19 +3,18 @@
 @section('title', 'Блог ЛарА - Профиль пользователя')
 
 @section('h1')
-    {{ $user->name }}
+    {{ $user['name'] }}
 @endsection
 
 @section('content')
     <div class='mx-5 py-1'>
-        <p>E-mail: {{ $user->email }} <br />
-
-        @if ($user->updated_at === $user->created_at)
-            <small class="text-muted">Дата создания профиля {{ $user->created_at }}</small>
-        @else
-            <small class="text-muted">Последнее изменение {{ $user->updated_at }}</small> <br />
-            <small class="text-muted">Дата создания профиля {{ $user->created_at }}</small>
+        <p>E-mail: {{ $user['email'] }} <br />
+        <small class="text-muted">Дата создания профиля {{ $user['created_at'] }}</small>
+        
+        @if ($user['updated_at'] !== $user['created_at'])
+            <small class="text-muted">Последнее изменение {{ $user['updated_at'] }}</small> <br />
         @endif
+
         </p>
     </div>
 
@@ -33,12 +32,17 @@
     <div class="mt-5">
         <p class="h4 text-center">Посты пользователя 
             @if (count($posts) < 10)
-                (всего
-            @else
-                (последние 
+                (всего {{ count($posts) }})
             @endif
-            {{ count($posts) }}):
         </p>
+        @if (count($posts) == 10)
+            <p class="text-center">
+                Показаны последние 10 постов. 
+                <a href="{{ route('search.posts', ['search' => $user['name'], 'searchByAuthor' => 'on']) }}">
+                    Посмотреть все
+                </a>
+            </p>
+        @endif
 
         @each('post._post', $posts, 'post', 'post._empty')
     </div>
@@ -46,12 +50,17 @@
     <div class="mt-5">
         <p class="h4 text-center">Комментарии пользователя
             @if (count($comments) < 10)
-                (всего
-            @else
-                (последние 
+                (всего {{ count($comments) }})
             @endif
-            {{ count($comments) }}):
         </p>
+        @if (count($comments) == 10)
+            <p class="text-center">
+                Показаны последние 10 комментариев. 
+                <a href="{{ route('search.comments', ['search' => $user['name'], 'searchByAuthor' => 'on']) }}">
+                    Посмотреть все
+                </a>
+            </p>
+        @endif
 
         @each('comment._comment', $comments, 'comment', 'comment._empty')
     </div>

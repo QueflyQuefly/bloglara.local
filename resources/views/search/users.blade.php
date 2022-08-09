@@ -7,7 +7,10 @@
 @section('content')
     @include('search._search')
 
+    @include('_errors')
+
     @if ($users)
+        <p class="lead text-center">Всего на странице пользователей: {{ count($users) }} </p>
         <div class="mt-3 mb-2">
             {{ $users->links() }}
         </div>

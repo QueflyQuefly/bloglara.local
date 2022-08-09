@@ -7,7 +7,12 @@
 @section('content')
     @include('search._search')
 
+    @include('search._check_author')
+
+    @include('_errors')
+
     @if ($posts)
+        <p class="lead text-center">Всего на странице постов: {{ count($posts) }} </p>
         <div class="mt-3 mb-2">
             {{ $posts->links() }}
         </div>

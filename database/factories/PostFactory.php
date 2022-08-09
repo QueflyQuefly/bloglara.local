@@ -21,7 +21,7 @@ class PostFactory extends Factory
         return [
             'user_id' => random_int(1, 100),
             'title' => fake()->realTextBetween(50, 100),
-            'content' => fake()->realTextBetween(500, 1000),
+            'content' => fake()->realTextBetween(3000, 10000),
             'image' => Post::DEFAULT_IMAGE_PATH,
         ];
     }

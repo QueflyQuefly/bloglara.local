@@ -16,27 +16,26 @@ class SearchController extends Controller
     {
         $request = $request->safe();
         $search = $request['search'] ?? '';
+        $users = $posts = $comments = [];
+        $maxResults = 5;
 
-        if ($search === '') {
-            $users = $posts = $comments = [];
-        } else {
+        if ($search !== '') {
             $users = User::where('name', 'LIKE', "%$search%")
                 ->orWhere('email', 'LIKE', "%$search%")
-                ->take(5)
+                ->take($maxResults)
                 ->get();
             $posts = Post::where('title', 'LIKE', "%$search%")
                 ->orWhere('content', 'LIKE', "%$search%")
-                ->take(5)
+                ->take($maxResults)
                 ->get();
-
             $comments = Comment::where('content', 'LIKE', "%$search%")
-                ->take(5)
+                ->take($maxResults)
                 ->get();
         }
 
-
         return view('search.index', [
             'search' => $search,
+            'maxResults' => $maxResults,
             'users' => $users,
             'posts' => $posts,
             'comments' => $comments,
@@ -50,13 +49,13 @@ class SearchController extends Controller
     {
         $request = $request->safe();
         $search = $request['search'] ?? '';
+        $users = [];
 
-        if ($search === '') {
-            $users = [];
-        } else {
+        if ($search !== '') {
             $users = User::where('name', 'LIKE', "%$search%")
                 ->orWhere('email', 'LIKE', "%$search%")
-                ->paginate(10);
+                ->paginate(10)
+                ->withQueryString();
         }
         
         return view('search.users', [
@@ -72,17 +71,26 @@ class SearchController extends Controller
     {
         $request = $request->safe();
         $search = $request['search'] ?? '';
+        $searchByAuthor = $request['searchByAuthor'] ?? '';
+        $posts = [];
 
-        if ($search === '') {
-            $posts = [];
-        } else {
+        if ($search !== '' && $searchByAuthor !== '') {
+            $posts = Post::latest('posts.id')
+                ->select('posts.*')
+                ->join('users', 'posts.user_id', 'users.id')
+                ->where('users.name', 'LIKE', "%$search%")
+                ->paginate(10)
+                ->withQueryString();
+        } elseif ($search !== '') {
             $posts = Post::where('title', 'LIKE', "%$search%")
                 ->orWhere('content', 'LIKE', "%$search%")
-                ->paginate(10);
+                ->paginate(10)
+                ->withQueryString();
         }
 
         return view('search.posts', [
             'search' => $search,
+            'searchByAuthor' => $searchByAuthor,
             'posts' => $posts,
         ]);
     }
@@ -94,16 +102,25 @@ class SearchController extends Controller
     {
         $request = $request->safe();
         $search = $request['search'] ?? '';
+        $searchByAuthor = $request['searchByAuthor'] ?? '';
+        $comments = [];
 
-        if ($search === '') {
-            $comments = [];
-        } else {
+        if ($search !== '' && $searchByAuthor !== '') {
+            $comments = Comment::latest('comments.id')
+                ->select('comments.*')
+                ->join('users', 'comments.user_id', 'users.id')
+                ->where('users.name', 'LIKE', "%$search%")
+                ->paginate(10)
+                ->withQueryString();
+        } elseif ($search !== '') {
             $comments = Comment::where('content', 'LIKE', "%$search%")
-                ->paginate(10);
+                ->paginate(10)
+                ->withQueryString();
         }
 
         return view('search.comments', [
             'search' => $search,
+            'searchByAuthor' => $searchByAuthor,
             'comments' => $comments,
         ]);
     }

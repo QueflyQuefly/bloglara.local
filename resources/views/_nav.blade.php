@@ -17,10 +17,10 @@
                         Поиск
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{ route('search.index') }}">Главная</a></li>
-                        <li><a class="dropdown-item" href="{{ route('search.users') }}">Пользователи</a></li>
-                        <li><a class="dropdown-item" href="{{ route('search.posts') }}">Посты</a></li>
-                        <li><a class="dropdown-item" href="{{ route('search.comments') }}">Комментарии</a></li>
+                        <li><a class="dropdown-item" href="{{ route('search.index') }}">Поиск</a></li>
+                        <li><a class="dropdown-item" href="{{ route('search.users') }}">Пользователей</a></li>
+                        <li><a class="dropdown-item" href="{{ route('search.posts') }}">Постов</a></li>
+                        <li><a class="dropdown-item" href="{{ route('search.comments') }}">Комментариев</a></li>
                     </ul>
                 </li>
                 

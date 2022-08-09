@@ -24,7 +24,8 @@ class SearchRequest extends FormRequest
     public function rules()
     {
         return [
-            'search' => [/* 'bail', 'required', 'min:1', */ 'max:120'],
+            'search' => ['max:120'],
+            'searchByAuthor' => ["in:on"],
         ];
     }
 
@@ -36,9 +37,8 @@ class SearchRequest extends FormRequest
     public function messages()
     {
         return [
-            /* 'search.required' => 'Введите поисковый запрос.',
-            'search.min' => 'Количество символов запроса ":input" должно быть больше, чем :min.', */
-            'search.max' => 'Количество символов запроса ":input" должно быть меньше, чем :max.',
+            'search.max' => 'Количество символов запроса должно быть меньше, чем :max.',
+            'searchByAuthor.in' => 'Неверные данные в запросе'
         ];
     }
 }
