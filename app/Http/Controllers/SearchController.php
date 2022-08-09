@@ -50,11 +50,12 @@ class SearchController extends Controller
         $request = $request->safe();
         $search = $request['search'] ?? '';
         $users = [];
+        $resultsOnPage = 10;
 
         if ($search !== '') {
             $users = User::where('name', 'LIKE', "%$search%")
                 ->orWhere('email', 'LIKE', "%$search%")
-                ->paginate(10)
+                ->paginate($resultsOnPage)
                 ->withQueryString();
         }
         
@@ -73,18 +74,19 @@ class SearchController extends Controller
         $search = $request['search'] ?? '';
         $searchByAuthor = $request['searchByAuthor'] ?? '';
         $posts = [];
+        $resultsOnPage = 10;
 
         if ($search !== '' && $searchByAuthor !== '') {
             $posts = Post::latest('posts.id')
                 ->select('posts.*')
                 ->join('users', 'posts.user_id', 'users.id')
                 ->where('users.name', 'LIKE', "%$search%")
-                ->paginate(10)
+                ->paginate($resultsOnPage)
                 ->withQueryString();
         } elseif ($search !== '') {
             $posts = Post::where('title', 'LIKE', "%$search%")
                 ->orWhere('content', 'LIKE', "%$search%")
-                ->paginate(10)
+                ->paginate($resultsOnPage)
                 ->withQueryString();
         }
 
@@ -104,17 +106,18 @@ class SearchController extends Controller
         $search = $request['search'] ?? '';
         $searchByAuthor = $request['searchByAuthor'] ?? '';
         $comments = [];
+        $resultsOnPage = 10;
 
         if ($search !== '' && $searchByAuthor !== '') {
             $comments = Comment::latest('comments.id')
                 ->select('comments.*')
                 ->join('users', 'comments.user_id', 'users.id')
                 ->where('users.name', 'LIKE', "%$search%")
-                ->paginate(10)
+                ->paginate($resultsOnPage)
                 ->withQueryString();
         } elseif ($search !== '') {
             $comments = Comment::where('content', 'LIKE', "%$search%")
-                ->paginate(10)
+                ->paginate($resultsOnPage)
                 ->withQueryString();
         }
 

@@ -19,40 +19,42 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $maxResults = 10;
+        $tts = 15;
+
         $jsonPosts = Cache::remember(
             sprintf('user_%s_posts', $user->id), 
-            now()->addSeconds(15),
-            function () use ($user) {
+            now()->addSeconds($tts),
+            function () use ($user, $maxResults) {
                 $posts = Post::latest()
                     ->where('user_id', $user->id)
-                    ->take(10)
+                    ->take($maxResults)
                     ->get();
 
                 return $posts->toJson();
             }
         );
-
-        $posts = json_decode($jsonPosts, true);
-
         $jsonComments = Cache::remember(
             sprintf('user_%s_comments', $user->id), 
-            now()->addSeconds(15), 
-            function () use ($user) {
+            now()->addSeconds($tts), 
+            function () use ($user, $maxResults) {
                 $comments = Comment::latest()
                     ->where('user_id', $user->id)
-                    ->take(10)
+                    ->take($maxResults)
                     ->get();
 
                 return $comments->toJson();
             }
         );
 
+        $posts = json_decode($jsonPosts, true);
         $comments = json_decode($jsonComments, true);
 
         return view('user.show', [
             'user' => $user,
             'posts' => $posts,
             'comments' => $comments,
+            'maxResults' => $maxResults,
         ]);
     }
 

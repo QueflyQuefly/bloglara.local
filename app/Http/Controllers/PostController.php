@@ -21,32 +21,37 @@ class PostController extends Controller
      */
     public function homepage()
     {
-        $jsonLastPosts = Cache::remember('last_posts', now()->addSeconds(15), function () {
+        $tts = 15;
+        $numberOfLastPosts = 5;
+        $numberOfTalkedPosts = 3;
+
+        $jsonLastPosts = Cache::remember('last_posts', now()->addSeconds($tts), function () use ($numberOfLastPosts) {
             $lastPosts = Post::latest('id')
-                ->take(5)
+                ->take($numberOfLastPosts)
                 ->get();
 
             return $lastPosts->toJson();
         });
-
-        $lastPosts = json_decode($jsonLastPosts, true);
-
-        $jsonMoreTalkedPosts = Cache::remember('more_talked_posts', now()->addSeconds(15), function () {
+        $jsonMoreTalkedPosts = Cache::remember('more_talked_posts', now()->addSeconds($tts), function ()  use ($numberOfTalkedPosts) {
             $moreTalkedPosts = Post::distinct()
-                ->select(DB::raw('posts.*, (SELECT COUNT(comments.id) FROM comments WHERE posts.id = comments.post_id) AS count_comments'))
-                ->join('comments', 'posts.id', '=', 'comments.post_id')
+                ->select(
+                    DB::raw('posts.*, (SELECT COUNT(comments.id) FROM comments WHERE posts.id = comments.post_id) AS count_comments')
+                )
+                ->join('comments', 'posts.id', 'comments.post_id')
                 ->where('comments.created_at', '>', (new \DateTime('-1 week'))->format('YmdHis'))
                 ->orderBy('count_comments', 'DESC')
-                ->take(3)
+                ->take($numberOfTalkedPosts)
                 ->get();
 
             return $moreTalkedPosts->toJson();
         });
 
+        $lastPosts = json_decode($jsonLastPosts, true);
         $moreTalkedPosts = json_decode($jsonMoreTalkedPosts, true);
 
         return view('homepage', [
             'lastPosts' => $lastPosts,
+            'numberOfLastPosts' => $numberOfLastPosts,
             'moreTalkedPosts' => $moreTalkedPosts,
         ]);
     }
@@ -150,6 +155,9 @@ class PostController extends Controller
         $this->authorize('update', $post);
 
         if ($request->hasFile('postImage')) {
+            if ($post->image !== Post::DEFAULT_IMAGE_PATH) {
+                Storage::delete($post->image);
+            }
             $pathToImage = $request->file('postImage')->store('images');
             $post->image = $pathToImage;
         }

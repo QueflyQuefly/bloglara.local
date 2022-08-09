@@ -31,13 +31,13 @@
 
     <div class="mt-5">
         <p class="h4 text-center">Посты пользователя 
-            @if (count($posts) < 10)
+            @if (count($posts) < $maxResults)
                 (всего {{ count($posts) }})
             @endif
         </p>
-        @if (count($posts) == 10)
+        @if (count($posts) == $maxResults)
             <p class="text-center">
-                Показаны последние 10 постов. 
+                Показаны последние {{ $maxResults }} постов. 
                 <a href="{{ route('search.posts', ['search' => $user['name'], 'searchByAuthor' => 'on']) }}">
                     Посмотреть все
                 </a>
@@ -49,13 +49,13 @@
 
     <div class="mt-5">
         <p class="h4 text-center">Комментарии пользователя
-            @if (count($comments) < 10)
+            @if (count($comments) < $maxResults)
                 (всего {{ count($comments) }})
             @endif
         </p>
-        @if (count($comments) == 10)
+        @if (count($comments) == $maxResults)
             <p class="text-center">
-                Показаны последние 10 комментариев. 
+                Показаны последние {{ $maxResults }} комментариев. 
                 <a href="{{ route('search.comments', ['search' => $user['name'], 'searchByAuthor' => 'on']) }}">
                     Посмотреть все
                 </a>
