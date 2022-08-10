@@ -36,14 +36,13 @@ class SeederTest extends TestCase
      */
     public function test_users_posts_comments_can_be_created_by_seeders()
     {
-        $this->seed([
-            PostSeeder::class,
-            UserSeeder::class,
-            CommentSeeder::class,
-        ]);
-
+        $this->seed(UserSeeder::class);
         $this->assertDatabaseCount('users', 10);
+
+        $this->seed(PostSeeder::class);
         $this->assertDatabaseCount('posts', 10);
+
+        $this->seed(CommentSeeder::class);
         $this->assertDatabaseCount('comments', 10);
     }
 
