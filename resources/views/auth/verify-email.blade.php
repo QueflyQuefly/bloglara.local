@@ -19,7 +19,7 @@
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
             <div class="mb-3">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" style="background-image: var(--bs-gradient);">
                     {{ __('Отправить письмо еще раз') }}
                 </button>
             </div>
@@ -27,7 +27,7 @@
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="btn btn-secondary">
+            <button type="submit" class="btn btn-secondary" style="background-image: var(--bs-gradient);">
                 {{ __('Выйти из аккаунта') }}
             </button>
         </form>

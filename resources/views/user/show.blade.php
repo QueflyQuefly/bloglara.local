@@ -10,12 +10,22 @@
     <div class='mx-5 py-1'>
         <p>E-mail: {{ $user['email'] }} <br />
         <small class="text-muted">Дата создания профиля {{ $user['created_at'] }}</small>
-        
-        @if ($user['updated_at'] !== $user['created_at'])
-            <small class="text-muted">Последнее изменение {{ $user['updated_at'] }}</small> <br />
+            @if ($user['updated_at'] !== $user['created_at'])
+                <br /> <small class="text-muted">Последнее изменение {{ $user['updated_at'] }}</small> 
+            @endif
+        </p>
+
+        @if ($user->isAdmin())
+            <p class="lead text-success">Является администратором этого сайта</p>
         @endif
 
-        </p>
+        @if (Auth::check() && Auth::user()->isAdmin())
+            <p>Roles: 
+                @foreach ($user['roles'] as $role)
+                    {{ $role }}    
+                @endforeach
+            </p>
+        @endif
     </div>
 
     @canany(['update', 'delete'], $user)     
@@ -23,8 +33,16 @@
             <form action='{{ route('user.delete', ['user' => $user]) }}'  method="POST">
                 @method('DELETE')
                 @csrf
-                <a href='{{ route('user.edit', ['user' => $user]) }}' class="btn btn-primary float-start">Изменить данные аккаунта</a>
-                <button type="submit" class="btn btn-secondary float-end">Удалить аккаунт</button>
+                <a 
+                    href='{{ route('user.edit', ['user' => $user]) }}' 
+                    class="btn btn-primary float-start" 
+                    style="background-image: var(--bs-gradient);"
+                >
+                    Изменить данные аккаунта
+                </a>
+                <button type="submit" class="btn btn-secondary float-end" style="background-image: var(--bs-gradient);">
+                    Удалить аккаунт
+                </button>
             </form>
         </div>
     @endcanany
@@ -38,7 +56,7 @@
         @if (count($posts) == $maxResults)
             <p class="text-center">
                 Показаны последние {{ $maxResults }} постов. 
-                <a href="{{ route('search.posts', ['search' => $user['name'], 'searchByAuthor' => 'on']) }}">
+                <a href="{{ route('search.posts', ['search' => $user->name, 'searchByAuthor' => 'on']) }}">
                     Посмотреть все
                 </a>
             </p>
@@ -56,7 +74,7 @@
         @if (count($comments) == $maxResults)
             <p class="text-center">
                 Показаны последние {{ $maxResults }} комментариев. 
-                <a href="{{ route('search.comments', ['search' => $user['name'], 'searchByAuthor' => 'on']) }}">
+                <a href="{{ route('search.comments', ['search' => $user->name, 'searchByAuthor' => 'on']) }}">
                     Посмотреть все
                 </a>
             </p>

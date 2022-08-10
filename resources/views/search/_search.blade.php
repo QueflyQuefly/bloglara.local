@@ -17,7 +17,14 @@
             />
             <label for="search">Введите поисковый запрос</label>
         </div>
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Поиск</button>
+        <button 
+            class="btn btn-outline-secondary" 
+            type="submit" 
+            id="button-addon2"
+            style="background-image: var(--bs-gradient);"
+        >
+            Поиск
+        </button>
     </div>
 </form>
 <style>

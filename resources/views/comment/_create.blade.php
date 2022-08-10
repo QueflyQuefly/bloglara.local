@@ -5,7 +5,7 @@
         <label for="commentContent" class="form-label">Содержимое комментария</label>
         <textarea 
             name='commentContent' 
-            class="form-control" 
+            class="form-control shadow-sm" 
             id="commentContent" 
             aria-describedby="textareaHelp" 
             style='height: 6rem' 
@@ -22,5 +22,7 @@
 
     @include('_errors')
 
-    <button type="submit" class="btn btn-primary float-end">Отправить</button>
+    <button type="submit" class="btn btn-primary float-end" style="background-image: var(--bs-gradient);">
+        Отправить
+    </button>
 </form>

@@ -9,6 +9,15 @@
 
     @include('_errors')
 
+    <div class="my-3">
+        <p class="">
+            Также доступен отдельный поиск 
+            <a href="{{ route('search.users') }}">пользователей</a>,
+            <a href="{{ route('search.posts') }}">постов</a> и 
+            <a href="{{ route('search.comments') }}">комментариев</a>.
+        </p>
+    </div>
+
     @if ($users || $posts || $comments)
         <div class="py-3">
             <p class="h4 text-center">Пользователи
@@ -59,6 +68,6 @@
             @each('comment._comment', $comments, 'comment', 'comment._empty')
         </div>
     @else
-        <p class="lead">Нет результатов поиска. Измените поисковый запрос</p>
+        <p class="lead text-danger">Нет результатов поиска. Измените поисковый запрос</p>
     @endif
 @endsection

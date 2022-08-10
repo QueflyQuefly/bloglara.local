@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $attributes = [
-        'roles' => '["ROLE_USER"]'
+        'roles' => '["' . self::ROLE_USER . '"]'
     ];
 
     /**
@@ -57,6 +57,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'roles' => 'array',
         'created_at' => 'datetime:d.m.Y в H:i:s',
         'updated_at' => 'datetime:d.m.Y в H:i:s',
     ];
@@ -82,7 +83,7 @@ class User extends Authenticatable
      */
     public function hasRole($role)
     {
-        return strpos($this->roles, $role) !== false;
+        return in_array($role, $this->roles);
     }
 
     /**
@@ -90,7 +91,20 @@ class User extends Authenticatable
      */
     public function isAdmin()
     {
-        return strpos($this->roles, self::ROLE_ADMIN) !== false;
+        return in_array(self::ROLE_ADMIN, $this->roles);
+    }
+
+    /**
+     * Get the roles a user has.
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function roles()
+    {
+        return Attribute::make(
+            get: fn ($value) => (array_merge($value, [self::ROLE_USER])),
+            set: fn ($value) => (array_merge($value, [self::ROLE_USER]))
+        );
     }
 
     /**

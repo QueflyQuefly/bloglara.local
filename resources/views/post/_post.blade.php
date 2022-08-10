@@ -1,8 +1,8 @@
 <a href="{{ route('post.show', ['post' => $post['id']]) }}" class="nav-link">
-    <div class="card mb-3">
+    <div class="card mb-3 shadow rounded-0 border-0">
         <div class="row g-0">
             <div class="col-md-4">
-                    <img src="/storage/{{ $post['image'] }}" class="img-fluid rounded" alt="Картинка к посту">
+                    <img src="/storage/{{ $post['image'] }}" class="img-fluid" alt="Картинка к посту">
             </div>
             <div class="col-md-8">
                 <div class="card-body">

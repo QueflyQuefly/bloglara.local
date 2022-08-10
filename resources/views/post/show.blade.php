@@ -15,18 +15,17 @@
                 Автор: {{ $post['author'] }}
             </a>
 
-            @if ($post['updated_at'] === $post['created_at'])
-                <small class="text-muted">Дата создания {{ $post['created_at'] }}</small>
-            @else
-                <small class="text-muted">Последнее изменение {{ $post['updated_at'] }}</small> <br />
-                <small class="text-muted">Дата создания {{ $post['created_at'] }}</small>
+            <small class="text-muted">Дата создания {{ $post['created_at'] }}</small>
+
+            @if ($post['updated_at'] !== $post['created_at'])
+                <br /> <small class="text-muted">Последнее изменение {{ $post['updated_at'] }}</small>
             @endif
         </p>
     </div>
 
-    <div class='py-4'>
+    <div class="my-5 shadow-lg">
         <a href="/storage/{{ $post['image'] }}" target="_blank" title="Открыть в новой вкладке">
-            <img src="/storage/{{ $post['image'] }}" class="img-fluid border" alt="Картинка к посту">
+            <img src="/storage/{{ $post['image'] }}" class="img-fluid" alt="Картинка к посту">
         </a>
     </div>
 
@@ -37,8 +36,16 @@
             <form action='{{ route('post.delete', ['post' => $post]) }}'  method="POST">
                 @method('DELETE')
                 @csrf
-                <a href='{{ route('post.edit', ['post' => $post]) }}' class="btn btn-primary float-start">Изменить пост</a>
-                <button type="submit" class="btn btn-secondary float-end">Удалить пост</button>
+                <a 
+                    href='{{ route('post.edit', ['post' => $post]) }}' 
+                    class="btn btn-primary float-start"
+                    style="background-image: var(--bs-gradient);"
+                >
+                    Изменить пост
+                </a>
+                <button type="submit" class="btn btn-secondary float-end" style="background-image: var(--bs-gradient);">
+                    Удалить пост
+                </button>
             </form>
         </div>
     @endif

@@ -9,7 +9,9 @@
                 <li class="nav-item">
                     <form action='{{ route('logout') }}' method='POST'>
                         @csrf
-                        <button type='submit' class="nav-link px-3 text-muted" style='border: none; background-color: inherit;'>Выйти</button>
+                        <button type='submit' class="nav-link px-3 text-muted" style='border: none; background-color: inherit;'>
+                            Выйти
+                        </button>
                     </form>
                 </li>
             @else
@@ -21,6 +23,8 @@
                 </li>
             @endauth
         </ul>
-        <p class="text-center text-muted">&copy; 2022 Blog LarA on Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
+        <p class="text-center text-muted">
+            &copy; 2022 Blog LarA on Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+        </p>
     </footer>
 </div>

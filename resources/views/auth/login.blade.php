@@ -10,7 +10,7 @@
         <div class="form-floating mb-3">
             <input 
                 id="email" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="email" 
                 name="email" 
                 value="{{ old('email') }}" 
@@ -26,7 +26,7 @@
         <div class="form-floating mb-3">
             <input 
                 id="password" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="password" 
                 name="password" 
                 aria-describedby="passHelp" 
@@ -44,7 +44,7 @@
         </div>
         <div class="mb-3">
             <label for="remember_me" class="form-label">
-                <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
+                <input id="remember_me" type="checkbox" class="form-check-input shadow-sm" name="remember">
                 {{ __('Запомнить меня') }}
             </label>
         </div>
@@ -64,10 +64,10 @@
         @endif
 
         <div class='mb-3'>
-            <a class="btn btn-secondary" href="{{ route('register') }}">
+            <a class="btn btn-secondary" href="{{ route('register') }}" style="background-image: var(--bs-gradient);">
                 {{ __('Зарегистрироваться') }}
             </a>
-            <button class="btn btn-primary float-end">
+            <button class="btn btn-primary float-end" style="background-image: var(--bs-gradient);">
                 {{ __('Войти') }}
             </button>
         </div>

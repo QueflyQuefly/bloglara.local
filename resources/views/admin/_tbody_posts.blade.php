@@ -31,7 +31,11 @@
     <td>{{ $post['updated_at'] }}</td>
     <td>{{ $post['created_at'] }}</td>
     <td>
-        <a href="{{ route('post.edit', ['post' => $post['id']]) }}" class="btn btn-primary">
+        <a 
+            href="{{ route('post.edit', ['post' => $post['id']]) }}" 
+            class="btn btn-primary" 
+            style="background-image: var(--bs-gradient);"
+        >
             Изменить
         </a>
     </td>
@@ -39,7 +43,9 @@
         <form action='{{ route('post.delete', ['post' => $post['id']]) }}'  method="POST">
             @method('DELETE')
             @csrf
-            <button type="submit" class="btn btn-secondary">Удалить</button>
+            <button type="submit" class="btn btn-secondary" style="background-image: var(--bs-gradient);">
+                Удалить
+            </button>
         </form>
     </td>
 </tr>

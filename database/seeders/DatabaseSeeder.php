@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             User::factory()
                 ->state([
                     'email' => User::ADMIN_EMAIL,
-                    'roles' => '["' . User::ROLE_ADMIN . '"]'
+                    'roles' => [User::ROLE_ADMIN, User::ROLE_USER],
                 ])
                 ->create();
         }
@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         $users = User::factory()
             ->count(10)
             ->state(new Sequence(
-                ['roles' => '["' . User::ROLE_USER . '"]'],
-                ['roles' => '["' . User::ROLE_ADMIN . '"]'],
+                ['roles' => [User::ROLE_ADMIN]],
+                ['roles' => [User::ROLE_ADMIN, User::ROLE_USER]],
             ))
             ->create();
 

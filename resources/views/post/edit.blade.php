@@ -53,6 +53,8 @@
 
         @include('_errors')
 
-        <button type="submit" class="btn btn-primary float-end">Отправить</button>
+        <button type="submit" class="btn btn-primary float-end" style="background-image: var(--bs-gradient);">
+            Отправить
+        </button>
     </form>
 @endsection

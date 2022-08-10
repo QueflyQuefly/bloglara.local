@@ -14,7 +14,7 @@
         <div class="mb-3">
             <input 
                 id="password" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="password" 
                 name="password" 
                 placeholder="Password"
@@ -27,7 +27,7 @@
         @include('_errors')
 
         <div class="mb-3">
-            <button class="btn btn-primary float-end">
+            <button class="btn btn-primary float-end" style="background-image: var(--bs-gradient);">
                 {{ __('Подтвердить') }}
             </button>
         </div>

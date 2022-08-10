@@ -19,7 +19,7 @@ class CommentController extends Controller
         $comments = Comment::latest('id')
             ->where('post_id', $post->id)
             ->paginate(10);
-        
+
         return view('comment.index', [
             'post' => $post,
             'comments' => $comments,
@@ -107,9 +107,9 @@ class CommentController extends Controller
     {
         $this->authorize('delete', $comment);
 
-        $post = $comment->post;
+        $postId = $comment->post_id;
         $comment->delete();
 
-        return redirect(route('post.show', ['post' => $post]));
+        return redirect(route('post.show', ['post' => $postId]));
     }
 }

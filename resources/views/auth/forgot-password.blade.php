@@ -16,7 +16,7 @@
         <div class='form-floating mb-3'>
             <input 
                 id="email" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="email" 
                 name="email" 
                 value="{{ old('email') }}" 
@@ -32,10 +32,10 @@
         @include('_errors')
 
         <div class="mb-3">
-            <a class="btn btn-secondary" href="{{ route('register') }}">
+            <a class="btn btn-secondary" href="{{ route('register') }}" style="background-image: var(--bs-gradient);">
                 {{ __('Зарегистрироваться') }}
             </a>
-            <button class="btn btn-primary float-end">
+            <button class="btn btn-primary float-end" style="background-image: var(--bs-gradient);">
                 {{ __('Подтвердить') }}
             </button>
         </div>

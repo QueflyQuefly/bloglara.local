@@ -15,14 +15,27 @@
                 @endif
             </small>
         </p>
-        <p class="card-text"><a href="mailto://{{ $user['email'] }}">Написать на email</a> {{ $user['email'] }}</p>
+        <p class="card-text">
+            <a href="mailto://{{ $user['email'] }}">
+                Написать на email
+            </a> 
+            {{ $user['email'] }}
+        </p>
 
         @if (Auth::check() && ((Auth::user()->id === $user['id']) || Auth::user()->isAdmin()))
             <form action='{{ route('user.delete', ['user' => $user['id']]) }}'  method="POST">
                 @method('DELETE')
                 @csrf
-                <a href='{{ route('user.edit', ['user' => $user['id']]) }}' class="btn btn-primary float-start">Изменить</a>
-                <button type="submit" class="btn btn-secondary float-end">Удалить</button>
+                <a 
+                    href='{{ route('user.edit', ['user' => $user['id']]) }}' 
+                    class="btn btn-primary float-start" 
+                    style="background-image: var(--bs-gradient);"
+                >
+                    Изменить
+                </a>
+                <button type="submit" class="btn btn-secondary float-end" style="background-image: var(--bs-gradient);">
+                    Удалить
+                </button>
             </form>
         @endif
     </div>

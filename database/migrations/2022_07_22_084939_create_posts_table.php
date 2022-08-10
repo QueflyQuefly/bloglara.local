@@ -16,7 +16,10 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table
+                ->foreignIdFor(User::class)
+                ->constrained()
+                ->cascadeOnDelete();
             $table->string('title', 255);
             $table->text('content');
             $table->string('image', 255);

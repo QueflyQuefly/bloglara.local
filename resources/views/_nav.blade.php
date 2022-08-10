@@ -4,7 +4,15 @@
             <img src="/apple-touch-icon.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
             Блог ЛарА
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation"
+        >
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -13,7 +21,13 @@
                     <a class="nav-link" href="{{ route('post.create') }}">Создать пост</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a 
+                        class="nav-link dropdown-toggle" 
+                        href="#" id="navbarDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false"
+                    >
                         Поиск
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -31,7 +45,14 @@
 
                     @if (Auth::user()->isAdmin())
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a 
+                                class="nav-link dropdown-toggle" 
+                                href="#" 
+                                id="navbarDropdown" 
+                                role="button" 
+                                data-bs-toggle="dropdown" 
+                                aria-expanded="false"
+                            >
                                 Админ-панель
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -57,19 +78,6 @@
                         <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
                     </li>
                 @endauth
-
-                {{-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        API
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="">Последние 10 постов</a></li>
-                        <li><a class="dropdown-item" href="">Наиболее обсуждаемые посты</a></li>
-                        <li><a class="dropdown-item" href="">Третий пост</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item disabled" href="#">Еще что-нибудь</a></li>
-                    </ul>
-                </li> --}}
             </ul>
             <div  id="navSearch">
                 <form class="d-flex" action="{{ route('search.index') }}" method="GET">

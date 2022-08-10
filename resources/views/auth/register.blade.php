@@ -10,7 +10,7 @@
         <div class="form-floating mb-3">
             <input 
                 id="name" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="text" 
                 name="name" 
                 value="{{ old('name') }}" 
@@ -27,7 +27,7 @@
         <div class="form-floating mb-3">
             <input 
                 id="email" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="email" 
                 name="email" 
                 value="{{ old('email') }}" 
@@ -43,7 +43,7 @@
         <div class="form-floating mb-3">
             <input 
                 id="password" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="password" 
                 name="password" 
                 aria-describedby="passHelp" 
@@ -59,7 +59,7 @@
         <div class="form-floating mb-3">
             <input 
                 id="password_confirmation" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="password" 
                 name="password_confirmation"
                 placeholder="Password"
@@ -73,7 +73,7 @@
         @include('_errors')
 
         <div class="mb-3">
-            <button class="btn btn-primary float-end">
+            <button class="btn btn-primary float-end" style="background-image: var(--bs-gradient);">
                 {{ __('Зарегистрироваться') }}
             </button>
         </div>

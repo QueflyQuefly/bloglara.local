@@ -52,7 +52,7 @@
         @include('_errors')
 
         <div class="mb-3">
-            <button class="btn btn-primary float-end">
+            <button class="btn btn-primary float-end" style="background-image: var(--bs-gradient);">
                 {{ __('Подтвердить') }}
             </button>
         </div>

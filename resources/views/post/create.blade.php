@@ -11,7 +11,7 @@
             <input 
                 type="text" 
                 name='postTitle' 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 id="postTitle" 
                 aria-describedby="textHelp" 
                 value="{{ old('postTitle') }}" 
@@ -27,7 +27,7 @@
             <label for="postContent" class="form-label">Содержимое поста</label>
             <textarea 
                 name='postContent' 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 id="postContent" 
                 aria-describedby="textareaHelp" 
                 style='height: 10rem' 
@@ -37,7 +37,7 @@
             >{{ old('postContent') }}</textarea>
             <div id="textareaHelp" class="form-text">Количество символов: от 1 до 30000</div>
         </div>
-        <div class="input-group mb-1">
+        <div class="input-group mb-1 shadow-sm">
             <input type="file" class="form-control" id="postImage" name="postImage">
             <label class="input-group-text" for="postImage">Картинка для поста</label>
         </div>
@@ -46,12 +46,14 @@
             Если вы не выберите картинку, будет установлена картинка по умолчанию
         </div>
         <div class="mt-3 form-check">
-            <input type="checkbox" name='postCheck' class="form-check-input" id="postCheck" required>
+            <input type="checkbox" name='postCheck' class="form-check-input shadow-sm" id="postCheck" required>
             <label class="form-check-label" for="postCheck">Согласен с правилами сайта</label>
         </div>
 
         @include('_errors')
 
-        <button type="submit" class="btn btn-primary float-end">Отправить</button>
+        <button type="submit" class="btn btn-primary float-end" style="background-image: var(--bs-gradient);">
+            Отправить
+        </button>
     </form>
 @endsection
