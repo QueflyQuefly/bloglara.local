@@ -20,7 +20,7 @@
 
         @section('container')
             <div class="container" style="min-height: 70vh; max-width: 900px;">
-                <h1 class='display-4 py-4'>@yield('h1', 'Base Template')</h1>
+                <h1 class='display-4 py-4 tezt-break'>@yield('h1', 'Base Template')</h1>
                 @yield('content')
             </div>
         @show

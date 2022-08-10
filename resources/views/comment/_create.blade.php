@@ -16,7 +16,7 @@
         <div id="textareaHelp" class="form-text">Количество символов: от 1 до 30000</div>
     </div>
     <div class="form-check">
-        <input type="checkbox" name='commentCheck' class="form-check-input" id="commentCheck" required>
+        <input type="checkbox" name='commentCheck' class="form-check-input shadow-sm" id="commentCheck" required>
         <label class="form-check-label" for="commentCheck">Согласен с правилами сайта</label>
     </div>
 

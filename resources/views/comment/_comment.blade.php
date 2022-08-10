@@ -1,4 +1,4 @@
-<div class="card mb-3 shadow rounded-0 border-0">
+<div class="card mb-3 shadow border-0">
     <div class="card-body">
         <h5 class="card-title">
             <a href="{{ route('user.show', ['user' => $comment['user_id']]) }}" class="nav-link">

@@ -28,6 +28,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'check' => ['required'],
         ];
     }
 
@@ -50,6 +51,7 @@ class RegisterRequest extends FormRequest
             'password.required' => 'Введите пароль.',
             'password.confirmed' => 'Пароли не совпадают.',
             'password.min' => 'Количество символов пароля должно быть больше, чем :min символов.',
+            'check.required' => 'Необходимо согласиться с правилами сайта.',
         ];
     }
 }

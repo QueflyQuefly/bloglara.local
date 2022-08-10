@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3 shadow border-0">
     <div class="card-body">
         <h5 class="card-title">
             <a href="{{ route('user.show', ['user' => $user['id']]) }}" class="nav-link">
@@ -7,18 +7,15 @@
         </h5>
         <p class="card-text mx-3">
             <small class="text-muted">
-                @if ($user['updated_at'] === $user['created_at'])
-                    Дата создания {{ $user['created_at'] }}
-                @else
-                    Последнее изменение {{ $user['updated_at'] }}. <br />
-                    Дата создания {{ $user['created_at'] }}
+                Дата создания {{ $user['created_at'] }}
+
+                @if ($user['updated_at'] !== $user['created_at'])
+                    <br /> Последнее изменение {{ $user['updated_at'] }}
                 @endif
             </small>
         </p>
         <p class="card-text">
-            <a href="mailto://{{ $user['email'] }}">
-                Написать на email
-            </a> 
+            <a href="mailto://{{ $user['email'] }}">Написать на E-mail</a> 
             {{ $user['email'] }}
         </p>
 

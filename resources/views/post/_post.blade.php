@@ -1,12 +1,12 @@
 <a href="{{ route('post.show', ['post' => $post['id']]) }}" class="nav-link">
-    <div class="card mb-3 shadow rounded-0 border-0">
+    <div class="card mb-3 shadow border-0">
         <div class="row g-0">
             <div class="col-md-4">
-                    <img src="/storage/{{ $post['image'] }}" class="img-fluid" alt="Картинка к посту">
+                    <img src="/storage/{{ $post['image'] }}" class="img-fluid rounded" alt="Картинка к посту">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="card-title text-wrap">
                         @if(mb_strlen($post['title'] > 91))
                             {{ mb_substr($post['title'], 0, 90) . '...' }}
                         @else 
@@ -17,7 +17,7 @@
                         <small>Автор: {{ $post['author'] }}. </small> 
                         <small class="text-muted">Изменен {{ $post['updated_at'] }}</small>
                     </p>
-                    <p class="card-text">
+                    <p class="card-text text-wrap">
                         @if(mb_strlen($post['content'] > 121))
                             {{ mb_substr($post['content'], 0, 120) . '...' }}
                         @else 

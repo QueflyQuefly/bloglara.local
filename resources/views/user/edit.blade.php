@@ -11,7 +11,7 @@
         <div class="form-floating mb-3">
             <input 
                 id="name" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="text" 
                 name="name" 
                 value="{{ $user->name }}" 
@@ -26,7 +26,7 @@
         <div class="form-floating mb-3">
             <input 
                 id="password" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="password" 
                 name="password" 
                 aria-describedby="passHelp" 
@@ -40,7 +40,7 @@
         <div class="form-floating mb-3">
             <input 
                 id="password_confirmation" 
-                class="form-control" 
+                class="form-control shadow-sm" 
                 type="password" 
                 name="password_confirmation" 
                 placeholder="Password"

@@ -23,13 +23,13 @@
         </p>
     </div>
 
-    <div class="my-5 shadow-lg">
+    <div class="mt-3 mb-4">
         <a href="/storage/{{ $post['image'] }}" target="_blank" title="Открыть в новой вкладке">
-            <img src="/storage/{{ $post['image'] }}" class="img-fluid" alt="Картинка к посту">
+            <img src="/storage/{{ $post['image'] }}" class="img-fluid border border-white rounded shadow-lg" alt="Картинка к посту">
         </a>
     </div>
 
-    <p class="mb-3" style="font-family: 'Tahoma';">{!! nl2br($post['content']) !!}</p>
+    <p class="mb-3 fs-5 text-break">{!! nl2br($post['content']) !!}</p>
 
     @if (Auth::check() && ((Auth::user()->id === $post['user_id']) || Auth::user()->isAdmin()))
         <div class="mb-5">

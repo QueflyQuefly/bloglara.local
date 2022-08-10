@@ -32,6 +32,7 @@
                 name="email" 
                 value="{{ old('email') }}" 
                 aria-describedby="emailHelp" 
+                autocomplete="on" 
                 placeholder="Email"
                 minlength="3"
                 maxlength="50"
@@ -69,7 +70,11 @@
             />
             <label for="password_confirmation">{{ __('Подтверждение пароля') }}</label>
         </div>
-
+        <div class="form-check">
+            <input type="checkbox" name='check' class="form-check-input shadow-sm" id="check" required>
+            <label class="form-check-label" for="check">Согласен с правилами сайта</label>
+        </div>
+    
         @include('_errors')
 
         <div class="mb-3">

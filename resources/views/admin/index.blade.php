@@ -10,6 +10,14 @@
         <p class="lead text-center">
             Показаны последние {{ $maxResults }} пользователей, постов, комментариев.
         </p>
+        <div class="my-3">
+            <p class="text-center fs-5">
+                Также доступно отдельное управление
+                <a href="{{ route('admin.users') }}">пользователями</a>,
+                <a href="{{ route('admin.posts') }}">постами</a> и 
+                <a href="{{ route('admin.comments') }}">комментариями</a>.
+            </p>
+        </div>
 
         <div class="my-5">
             <p class='h4 text-center'>

@@ -10,9 +10,8 @@
         </a>
     </td>
     <td>
-        <a href="mailto://{{ $user['email'] }}" class="nav-link">
-            {{ $user['email'] }}
-        </a>
+        <a href="mailto://{{ $user['email'] }}">Написать на E-mail</a> 
+        {{ $user['email'] }}
     </td>
     <td>{{ $user['updated_at'] }}</td>
     <td>{{ $user['created_at'] }}</td>
