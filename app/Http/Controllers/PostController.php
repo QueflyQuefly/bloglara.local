@@ -24,6 +24,7 @@ class PostController extends Controller
         $tts = 15;
         $numberOfLastPosts = 5;
         $numberOfTalkedPosts = 3;
+        $test = false;
 
         $jsonLastPosts = Cache::remember('last_posts', now()->addSeconds($tts), function () use ($numberOfLastPosts) {
             $lastPosts = Post::latest('id')
